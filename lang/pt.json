@@ -1,6 +1,6 @@
 {
-    "wellcome":{
-        "message": "Bem vindo ao PostIn",
+    "welcome": {
+        "message": "Bem vindo ao SiGeS",
         "login_now": "ENTRAR AGORA",
         "or": "ou",
         "login_google": "ENTRAR COM GOOGLE",
@@ -9,6 +9,11 @@
         "text_step3": "Seja o que você quiser, se comunique e aprenda com os outros"
     },
     "login": {
-
-    }
+        "email": "E-mail",
+        "password": "Senha",
+        "recovery": "Esqueceu a Senha",
+        "remember": "Lembrar",
+        "or": "ou"
+    },
+    "register": "Registro"
 }

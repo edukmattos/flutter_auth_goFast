@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/app/modules/home/home_page.dart';
-import 'package:flutter_auth/app/modules/wellcome/wellcome_module.dart';
-import 'package:flutter_auth/app/modules/wellcome/wellcome_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:splashscreen/splashscreen.dart';
 
-import '../auth/login/login_page.dart';
 import 'splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
@@ -18,36 +13,23 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends ModularState<SplashPage, SplashController> {
   //use 'controller' variable to access controller
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 1), () {
+      Modular.to.pushNamed("/welcome");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        SplashScreen(
-          seconds: 2,
-          routeName: "/",
-          onClick: () => print("Flutter Egypt"),
-          title: Text(
-            'Welcome In SplashScreen',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-          ),
-          gradientBackground: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Color(0xffED213A), Color(0xff93291E)],
-          ),
-          navigateAfterSeconds: WellcomePage(),
-          loaderColor: Colors.transparent,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/logos/app_logo.png"),
+          fit: BoxFit.none,
         ),
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/logos/app_logo.png"),
-              fit: BoxFit.none,
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

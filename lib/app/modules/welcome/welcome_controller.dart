@@ -1,25 +1,28 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../app_controller.dart';
 import '../shared/auth/repositories/interfaces/auth_repository_interface.dart';
 
-part 'wellcome_controller.g.dart';
+part 'welcome_controller.g.dart';
 
 @Injectable()
-class WellcomeController = _WellcomeControllerBase with _$WellcomeController;
+class WelcomeController = _WelcomeControllerBase with _$WelcomeController;
 
-abstract class _WellcomeControllerBase with Store {
+abstract class _WelcomeControllerBase with Store {
+  final AppController appController;
+
   IAuthRepository authRepository;
 
-  _WellcomeControllerBase() {
+  _WelcomeControllerBase(this.appController) {
     authRepository = Modular.get<IAuthRepository>();
   }
 
-  void wellcomeCtrlSignInEmailPassword() {
+  void welcomeCtrlSignInEmailPassword() {
     Modular.to.pushNamed('/login');
   }
 
-  void wellcomeCtrlSignInGoogle() {
+  void welcomeCtrlSignInGoogle() {
     authRepository.signInGoogle().then((value) {
       if (value.success) {
         Modular.to.pushNamed('/home');

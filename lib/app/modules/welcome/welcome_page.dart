@@ -3,23 +3,26 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/config/app_colors_config.dart';
 import '../../core/features/localization/app_translate.dart';
-import 'wellcome_controller.dart';
+import 'welcome_controller.dart';
 import 'widgets/slide_widget.dart';
 import 'widgets/slot_dots_widget.dart';
 
-class WellcomePage extends StatefulWidget {
+class WelcomePage extends StatefulWidget {
   final String title;
-  const WellcomePage({Key key, this.title = "Wellcome"}) : super(key: key);
+  const WelcomePage({
+    Key key,
+    this.title = "Welcome",
+  }) : super(key: key);
 
   @override
-  _WellcomePageState createState() => _WellcomePageState();
+  _WelcomePageState createState() => _WelcomePageState();
 }
 
-class _WellcomePageState
-    extends ModularState<WellcomePage, WellcomeController> {
+class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
   //use 'controller' variable to access controller
 
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
@@ -35,7 +38,7 @@ class _WellcomePageState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      AppTranslate(context).text('wellcome.message' ?? ''),
+                      AppTranslate(context).text('welcome.message' ?? ""),
                       style: Theme.of(context)
                           .textTheme
                           .headline5
@@ -54,14 +57,6 @@ class _WellcomePageState
                     SizedBox(
                       height: _height * 0.06,
                     ),
-                    RaisedButton(
-                      onPressed: controller.wellcomeCtrlSignInEmailPassword,
-                      child: Text(
-                        AppTranslate(context).text('wellcome.login_now' ?? ''),
-                        style: Theme.of(context).textTheme.bodyText2.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                    ),
                   ],
                 ),
                 Column(
@@ -75,7 +70,7 @@ class _WellcomePageState
                             color: AppColorsConfig.grey400,
                             width: 100),
                         Text(
-                          AppTranslate(context).text('wellcome.or' ?? ''),
+                          AppTranslate(context).text('welcome.or' ?? ""),
                           style: Theme.of(context)
                               .textTheme
                               .bodyText2
@@ -92,14 +87,9 @@ class _WellcomePageState
                       height: _height * 0.04,
                     ),
                     RaisedButton(
-                      color: Colors.red,
-                      // ignore: lines_longer_than_80_chars
-                      onPressed: () async =>
-                          controller.wellcomeCtrlSignInGoogle(),
+                      onPressed: controller.welcomeCtrlSignInEmailPassword,
                       child: Text(
-                        // ignore: lines_longer_than_80_chars
-                        AppTranslate(context)
-                            .text('wellcome.login_google' ?? ''),
+                        AppTranslate(context).text('welcome.login_now' ?? ""),
                         style: Theme.of(context).textTheme.bodyText2.copyWith(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),

@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'wellcome_controller.dart';
+part of 'welcome_controller.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $WellcomeController = BindInject(
-  (i) => WellcomeController(),
+final $WelcomeController = BindInject(
+  (i) => WelcomeController(i<AppController>()),
   singleton: true,
   lazy: true,
 );
@@ -18,7 +18,7 @@ final $WellcomeController = BindInject(
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$WellcomeController on _WellcomeControllerBase, Store {
+mixin _$WelcomeController on _WelcomeControllerBase, Store {
   @override
   String toString() {
     return '''

@@ -7,7 +7,11 @@ import 'slide_page_widget.dart';
 class SlideWidget extends StatelessWidget {
   final ValueChanged<int> onPageChanged;
 
-  const SlideWidget({Key key, this.onPageChanged}) : super(key: key);
+  const SlideWidget({
+    Key key,
+    this.onPageChanged,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +23,7 @@ class SlideWidget extends StatelessWidget {
           onPageChanged: onPageChanged,
           children: <Widget>[
             SlidePageWidget(
-              text: AppTranslate(context).text('wellcome.text_step1' ?? ''),
+              text: AppTranslate(context).text('welcome.text_step1' ?? ''),
               asset: AppAssetsConfig.step001,
             ),
           ],

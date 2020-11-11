@@ -6,8 +6,11 @@ class SlidePageWidget extends StatelessWidget {
   final String text;
   final String asset;
 
-  const SlidePageWidget({Key key, this.text = '', this.asset = ''})
-      : super(key: key);
+  const SlidePageWidget({
+    Key key,
+    this.text = '',
+    this.asset = '',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -9,6 +9,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import '../../../core/config/app_config.dart';
 import '../../../core/config/constants.dart';
+import '../../../core/features/localization/app_translate.dart';
 import '../../shared/auth/repositories/interfaces/auth_repository_interface.dart';
 import 'login_controller.dart';
 
@@ -81,7 +82,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     //border: InputBorder.none,
-                    labelText: 'E-mail',
+                    labelText: AppTranslate(context).text('login.email'),
                     labelStyle: kLabelStyle,
                     contentPadding: EdgeInsets.only(
                       top: kDefaultPaddin * 0.0,
@@ -167,7 +168,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     //border: InputBorder.none,
-                    labelText: 'Senha',
+                    labelText: AppTranslate(context).text('login.password'),
                     labelStyle: kLabelStyle,
                     contentPadding: EdgeInsets.only(
                       top: kDefaultPaddin * 0.0,
@@ -219,7 +220,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
         onPressed: () => print('Forgot Password Button Pressed'),
         padding: EdgeInsets.only(right: 0.0),
         child: Text(
-          'Esqueceu a senha ?',
+          AppTranslate(context).text('login.recovery'),
           style: kLabelStyle,
         ),
       ),
@@ -245,7 +246,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
             ),
           ),
           Text(
-            'Me lembrar',
+            AppTranslate(context).text('login.recovery'),
             style: kLabelStyle,
           ),
         ],
@@ -306,7 +307,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
               ),
             ),
           ),
-          Text('ou'),
+          Text(
+            AppTranslate(context).text('login.or'),
+          ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -558,6 +561,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         _buildForgotPasswordBtn(),
                         _buildRememberMeCheckbox(),
                         _buildLoginBtn(),
+                        // ignore: lines_longer_than_80_chars
                         //_buildSignInWithText(),
                         _divider(),
                         //_facebookButton(),

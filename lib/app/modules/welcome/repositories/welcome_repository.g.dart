@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'wellcome_repository.dart';
+part of 'welcome_repository.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $WellcomeRepository = BindInject(
-  (i) => WellcomeRepository(i<DioForNative>()),
+final $WelcomeRepository = BindInject(
+  (i) => WelcomeRepository(i<DioForNative>()),
   singleton: true,
   lazy: true,
 );

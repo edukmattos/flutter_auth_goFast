@@ -1,15 +1,15 @@
 import 'package:dio/native_imp.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'interfaces/wellcome_repository_interface.dart';
+import 'interfaces/welcome_repository_interface.dart';
 
-part 'wellcome_repository.g.dart';
+part 'welcome_repository.g.dart';
 
 @Injectable()
-class WellcomeRepository implements IWellcomeRepository {
+class WelcomeRepository implements IWelcomeRepository {
   final DioForNative client;
 
-  WellcomeRepository(this.client);
+  WelcomeRepository(this.client);
 
   Future fetchPost() async {
     final response =
