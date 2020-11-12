@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/app/core/features/localization/app_translate.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
@@ -41,7 +42,10 @@ abstract class _LoginControllerBase with Store {
   }
 
   String validateEmail() {
-    if (validatorRequired(email)) return "Obrigatorio.";
+    // ignore: lines_longer_than_80_chars
+    if (validatorRequired(email)) {
+      return "Obrigatorio.";
+    }
     if (validatorEmail(email)) return "Inválido.";
     return null;
   }

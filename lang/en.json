@@ -15,5 +15,8 @@
         "remember": "Remember me",
         "or": "or"
     },
-    "register": "New Account"
+    "register": "New Account",
+    "field": {
+        "required": "Required"
+    }
 }

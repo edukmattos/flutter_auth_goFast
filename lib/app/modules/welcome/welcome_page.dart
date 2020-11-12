@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/app/modules/auth/login/login_module.dart';
+import 'package:flutter_auth/app/modules/auth/login/login_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/config/app_colors_config.dart';
@@ -21,86 +23,35 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
   //use 'controller' variable to access controller
 
-  int currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      AppTranslate(context).text('welcome.message' ?? ""),
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    SlideWidget(
-                      onPageChanged: (index) {
-                        setState(() {
-                          currentIndex = index;
-                        });
-                      },
-                    ),
-                    SlideDotsWidget(
-                      currentPage: currentIndex,
-                    ),
-                    SizedBox(
-                      height: _height * 0.06,
-                    ),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Container(
-                            // ignore: lines_longer_than_80_chars
-                            height: 1,
-                            color: AppColorsConfig.grey400,
-                            width: 100),
-                        Text(
-                          AppTranslate(context).text('welcome.or' ?? ""),
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2
-                              .copyWith(color: AppColorsConfig.grey600),
-                        ),
-                        Container(
-                            // ignore: lines_longer_than_80_chars
-                            height: 1,
-                            color: AppColorsConfig.grey400,
-                            width: 100),
-                      ],
-                    ),
-                    SizedBox(
-                      height: _height * 0.04,
-                    ),
-                    RaisedButton(
-                      onPressed: controller.welcomeCtrlSignInEmailPassword,
-                      child: Text(
-                        AppTranslate(context).text('welcome.login_now' ?? ""),
-                        style: Theme.of(context).textTheme.bodyText2.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+        body: PageView(
+          controller: controller.pageViewController,
+          children: [
+            Container(),
+            Container(),
+            RouterOutlet(module: LoginModule()),
+          ],
         ),
-      ),
-    );
+        bottomNavigationBar: AnimatedBuilder(
+            animation: controller.pageViewController,
+            builder: (context, snapshot) {
+              return BottomNavigationBar(
+                currentIndex: controller.pageViewController?.page?.round() ?? 0,
+                onTap: (index) {
+                  controller.pageViewController.jumpToPage(index);
+                },
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home), label: 'Home'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.settings), label: 'Config'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.person_outline), label: 'Perfil'),
+                ],
+              );
+            }));
   }
 }
