@@ -1,12 +1,12 @@
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-part 'splash_controller.g.dart';
+part 'about_controller.g.dart';
 
 @Injectable()
-class SplashController = _SplashControllerBase with _$SplashController;
+class AboutController = _AboutControllerBase with _$AboutController;
 
-abstract class _SplashControllerBase with Store {
+abstract class _AboutControllerBase with Store {
   @observable
   int value = 0;
 

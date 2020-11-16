@@ -1,8 +1,7 @@
-import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
-import '../../app_controller.dart';
-
+import '../../../app_controller.dart';
 part 'home_controller.g.dart';
 
 @Injectable()

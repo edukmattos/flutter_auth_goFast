@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/config/app_colors_config.dart';
+
+import '../../../../../core/config/app_colors_config.dart';
 
 class Dot extends StatelessWidget {
   final int index;

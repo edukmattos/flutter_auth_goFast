@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/config/app_colors_config.dart';
+import '../../../../../core/config/app_colors_config.dart';
 
 class SlidePageWidget extends StatelessWidget {
   final String text;

@@ -1,15 +1,15 @@
 import 'package:dio/native_imp.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'interfaces/splash_repository_interface.dart';
+import 'interfaces/dashboard_repository_interface.dart';
 
-part 'splash_repository.g.dart';
+part 'dashboard_repository.g.dart';
 
 @Injectable()
-class SplashRepository implements ISplashRepository {
+class DashboardRepository implements IDashboardRepository {
   final DioForNative client;
 
-  SplashRepository(this.client);
+  DashboardRepository(this.client);
 
   Future fetchPost() async {
     final response =

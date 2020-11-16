@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'splash_controller.dart';
+part of 'contact_controller.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $SplashController = BindInject(
-  (i) => SplashController(),
+final $ContactController = BindInject(
+  (i) => ContactController(),
   singleton: true,
   lazy: true,
 );
@@ -18,8 +18,8 @@ final $SplashController = BindInject(
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$SplashController on _SplashControllerBase, Store {
-  final _$valueAtom = Atom(name: '_SplashControllerBase.value');
+mixin _$ContactController on _ContactControllerBase, Store {
+  final _$valueAtom = Atom(name: '_ContactControllerBase.value');
 
   @override
   int get value {
@@ -34,17 +34,17 @@ mixin _$SplashController on _SplashControllerBase, Store {
     });
   }
 
-  final _$_SplashControllerBaseActionController =
-      ActionController(name: '_SplashControllerBase');
+  final _$_ContactControllerBaseActionController =
+      ActionController(name: '_ContactControllerBase');
 
   @override
   void increment() {
-    final _$actionInfo = _$_SplashControllerBaseActionController.startAction(
-        name: '_SplashControllerBase.increment');
+    final _$actionInfo = _$_ContactControllerBaseActionController.startAction(
+        name: '_ContactControllerBase.increment');
     try {
       return super.increment();
     } finally {
-      _$_SplashControllerBaseActionController.endAction(_$actionInfo);
+      _$_ContactControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

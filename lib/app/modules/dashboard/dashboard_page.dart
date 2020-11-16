@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/app/modules/shared/auth/repositories/interfaces/auth_repository_interface.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../app_controller.dart';
-import '../shared/auth/repositories/interfaces/auth_repository_interface.dart';
-import 'home_controller.dart';
+import 'dashboard_controller.dart';
 
-class HomePage extends StatefulWidget {
+class DashboardPage extends StatefulWidget {
   final AppController appController;
-
   final String title;
-
-  const HomePage({
+  const DashboardPage({
     Key key,
     this.appController,
-    this.title = "Home",
+    this.title = "Dashboard",
   }) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _DashboardPageState createState() => _DashboardPageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeController> {
+class _DashboardPageState
+    extends ModularState<DashboardPage, DashboardController> {
   //use 'controller' variable to access controller
 
   @override

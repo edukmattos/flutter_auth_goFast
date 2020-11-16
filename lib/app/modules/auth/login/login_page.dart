@@ -55,19 +55,17 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
             //SizedBox(height: kDefaultPaddin * 0.5),
             Container(
               alignment: Alignment.centerLeft,
-              decoration: kBoxDecorationStyle,
+              decoration: controller.appController.isDark
+                  ? kBoxDecorationStyleDark
+                  : kBoxDecorationStyleLight,
               height: kDefaultPaddin * 2.5,
               child: Padding(
-                padding: const EdgeInsets.only(top: kDefaultPaddin * 0.00),
+                padding: EdgeInsets.only(top: kDefaultPaddin * 0.00),
                 child: TextFormField(
                   onChanged: controller.changeEmail,
                   autofocus: false,
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'OpenSans',
-                  ),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -89,7 +87,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                     ),
 
                     prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: kDefaultPaddin * 0.0,
                         vertical: kDefaultPaddin * 0.0,
                       ),
@@ -141,10 +139,13 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
             //SizedBox(height: kDefaultPaddin * 0.5),
             Container(
               alignment: Alignment.centerLeft,
-              decoration: kBoxDecorationStyle,
+              // ignore: lines_longer_than_80_chars
+              decoration: controller.appController.isDark
+                  ? kBoxDecorationStyleDark
+                  : kBoxDecorationStyleLight,
               height: kDefaultPaddin * 2.5,
               child: Padding(
-                padding: const EdgeInsets.only(top: kDefaultPaddin * 0.00),
+                padding: EdgeInsets.only(top: kDefaultPaddin * 0.00),
                 child: TextFormField(
                   onChanged: controller.changePassword,
                   autofocus: false,
@@ -175,7 +176,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                     ),
 
                     prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: kDefaultPaddin * 0.0,
                         vertical: kDefaultPaddin * 0.0,
                       ),
@@ -371,7 +372,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: GoogleSignInButton(
-        darkMode: controller.appController.isDark,
+        darkMode: !controller.appController.isDark,
         onPressed: () async {
           await Modular.get<IAuthRepository>().signInGoogle().then((result) {
             if (result.success) {
@@ -515,19 +516,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 Container(
                   height: double.infinity,
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFF73AEF5),
-                        Color(0xFF61A4F1),
-                        Color(0xFF478DE0),
-                        Color(0xFF398AE5),
-                      ],
-                      stops: [0.1, 0.4, 0.7, 0.9],
-                    ),
-                  ),
+                  decoration: controller.appController.isDark
+                      ? kBoxDecorationStyleBackgroundDark
+                      : kBoxDecorationStyleBackgroundLight,
                 ),
                 Container(
                   height: double.infinity,
@@ -550,6 +541,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         //  ),
                         //),
                         _buildAuthLogo(),
+                        Text(
+                          'Sign In',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'OpenSans',
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         SizedBox(
                           height: kDefaultPaddin * 0.5,
                         ),

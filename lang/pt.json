@@ -1,6 +1,7 @@
 {
     "welcome": {
         "message": "Bem vindo ao SiGeS",
+        "signIn": "Entrar",
         "login_now": "ENTRAR AGORA",
         "or": "ou",
         "login_google": "ENTRAR COM GOOGLE",

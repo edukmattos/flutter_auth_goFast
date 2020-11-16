@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../app_controller.dart';
-import '../shared/auth/repositories/interfaces/auth_repository_interface.dart';
+import '../../../../app_controller.dart';
+import '../../../shared/auth/repositories/interfaces/auth_repository_interface.dart';
 
 part 'welcome_controller.g.dart';
 

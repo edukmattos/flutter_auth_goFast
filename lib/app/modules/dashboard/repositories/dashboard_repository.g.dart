@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'splash_repository.dart';
+part of 'dashboard_repository.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $SplashRepository = BindInject(
-  (i) => SplashRepository(i<DioForNative>()),
+final $DashboardRepository = BindInject(
+  (i) => DashboardRepository(i<DioForNative>()),
   singleton: true,
   lazy: true,
 );
