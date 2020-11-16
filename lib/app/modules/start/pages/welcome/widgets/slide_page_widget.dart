@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/app/core/config/constants.dart';
 
 import '../../../../../core/config/app_colors_config.dart';
 
@@ -20,17 +21,14 @@ class SlidePageWidget extends StatelessWidget {
       children: <Widget>[
         Text(
           text,
-          style: Theme.of(context)
-              .textTheme
-              .headline6
-              .copyWith(color: AppColorsConfig.grey600, fontSize: 18),
+          style: kFontTextStyle20,
         ),
         Container(
           child: Align(
             alignment: Alignment.center,
             child: Image.asset(
               asset,
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.35,
             ),
           ),
         )

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../core/config/app_colors_config.dart';
 import '../../../../core/features/localization/app_translate.dart';
 import 'welcome_controller.dart';
 import 'widgets/slide_widget.dart';

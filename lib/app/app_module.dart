@@ -13,7 +13,6 @@ import 'modules/shared/auth/repositories/interfaces/auth_repository_interface.da
 import 'modules/start/pages/about/about_controller.dart';
 import 'modules/start/pages/contact/contact_controller.dart';
 import 'modules/start/pages/welcome/welcome_controller.dart';
-import 'modules/start/pages/welcome/welcome_module.dart';
 import 'modules/start/start_module.dart';
 import 'modules/temp/home/home_module.dart';
 

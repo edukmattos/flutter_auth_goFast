@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_auth/app/core/config/app_config.dart';
-import 'package:flutter_auth/app/core/config/constants.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/config/app_colors_config.dart';
+import '../../../../core/config/app_config.dart';
+import '../../../../core/config/constants.dart';
 import '../../../../core/features/localization/app_translate.dart';
 import 'welcome_controller.dart';
 import 'widgets/slide_widget.dart';
@@ -46,8 +45,10 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
       ),
     );
 
+    var _height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar: appBar,
+      //appBar: appBar,
       //floatingActionButton: _buildSpeedDial(),
       //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       //bottomNavigationBar: _buildBottomBar(),
@@ -85,15 +86,31 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
                         //    fontWeight: FontWeight.bold,
                         //  ),
                         //),
+                        SizedBox(
+                          height: kDefaultPaddin * 1.0,
+                        ),
                         Text(
                           AppTranslate(context).text('welcome.message'),
-                          style: GoogleFonts.adventPro(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: kFontTextStyle30,
                         ),
                         SizedBox(
                           height: kDefaultPaddin * 0.5,
+                        ),
+                        SlideWidget(
+                          onPageChanged: (index) {
+                            setState(() {
+                              currentIndex = index;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: kDefaultPaddin * 0.5,
+                        ),
+                        SlideDotsWidget(
+                          currentPage: currentIndex,
+                        ),
+                        SizedBox(
+                          height: _height * 0.06,
                         ),
                       ],
                     ),

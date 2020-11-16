@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-final kHintTextStyle = TextStyle(
-  color: Colors.white54,
-  fontFamily: 'OpenSans',
+final kFontTextStyle20 = GoogleFonts.oxygen(
+  fontSize: 20,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+final kFontTextStyle30 = GoogleFonts.oxygen(
+  fontSize: 30,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
 );
 
 final kLabelStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
+  fontFamily: 'OpenSans',
+);
+
+final kHintTextStyle = TextStyle(
+  color: Colors.white54,
   fontFamily: 'OpenSans',
 );
 
