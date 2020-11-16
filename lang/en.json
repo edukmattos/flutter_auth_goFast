@@ -10,7 +10,8 @@
         "text_step3": "Whatever you want, communicate and learn from others"
     },
     "signIn": {
-        "title": "Sign In",
+        "title": "SiGeS",
+        "subTitle": "Sign In",
         "email": "Email",
         "password": "Password",
         "recovery": "Forgot Password",

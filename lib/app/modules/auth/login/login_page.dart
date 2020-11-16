@@ -14,13 +14,8 @@ import '../../shared/auth/repositories/interfaces/auth_repository_interface.dart
 import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
-  final String title;
-  final String subtitle;
-
   const LoginPage({
     Key key,
-    this.title = appPageTagAuthLogin,
-    this.subtitle = appPageTagFunctionSearch,
   }) : super(key: key);
 
   @override
@@ -274,7 +269,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       );
                     }
                   : null,
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(10.0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
@@ -368,10 +363,10 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
 
   Widget _googleButton() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: EdgeInsets.symmetric(vertical: 10.0),
       width: double.infinity,
       child: GoogleSignInButton(
-        darkMode: !controller.appController.isDark,
+        darkMode: controller.appController.isDark,
         onPressed: () async {
           await Modular.get<IAuthRepository>().signInGoogle().then((result) {
             if (result.success) {
@@ -488,12 +483,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(widget.title),
+          Text(
+            AppTranslate(context).text('signIn.title'),
+            style: kPageTitleTextStyle20,
+          ),
           Visibility(
             visible: true,
             child: Text(
-              widget.subtitle,
-              style: TextStyle(fontSize: 12.0),
+              AppTranslate(context).text('signIn.subTitle'),
+              style: kPageSubTitleTextStyle14,
             ),
           )
         ],
@@ -557,7 +555,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         _buildSignInBtn(),
                         // ignore: lines_longer_than_80_chars
                         //_buildSignInWithText(),
-                        _divider(),
+                        //_divider(),
                         //_facebookButton(),
                         //_googleButton(),
                         //_buildSocialBtnRow(),

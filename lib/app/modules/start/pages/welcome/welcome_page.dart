@@ -30,13 +30,13 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
   Widget _buildSignInBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
+      //width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
           Modular.to.pushNamed('/login');
         },
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(10.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5.0),
         ),
@@ -53,6 +53,9 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
   }
 
   Widget build(BuildContext context) {
+    var _height = MediaQuery.of(context).size.height;
+    var _width = MediaQuery.of(context).size.width;
+
     var appBar = AppBar(
       title: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -69,8 +72,6 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
         ],
       ),
     );
-
-    var _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       //appBar: appBar,
@@ -137,7 +138,10 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
                         SizedBox(
                           height: _height * 0.06,
                         ),
-                        _buildSignInBtn(),
+                        SizedBox(
+                          width: double.infinity,
+                          child: _buildSignInBtn(),
+                        ),
                       ],
                     ),
                   ),

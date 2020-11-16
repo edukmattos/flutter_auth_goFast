@@ -10,7 +10,8 @@
         "text_step3": "Seja o que você quiser, se comunique e aprenda com os outros"
     },
     "signIn": {
-        "title": "Sign In",
+        "title": "SiGeS",
+        "subTitle": "Entrar",
         "email": "E-mail",
         "password": "Senha",
         "recovery": "Esqueceu a Senha",
