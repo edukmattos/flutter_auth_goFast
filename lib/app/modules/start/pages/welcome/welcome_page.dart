@@ -27,6 +27,31 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
   int currentIndex = 0;
 
   @override
+  Widget _buildSignInBtn() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: RaisedButton(
+        elevation: 5.0,
+        onPressed: () {
+          Modular.to.pushNamed('/login');
+        },
+        padding: EdgeInsets.all(15.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        color: Colors.blue,
+        child: Text(
+          AppTranslate(context).text('welcome.signIn'),
+          // ignore: lines_longer_than_80_chars
+          style: controller.appController.isDark
+              ? kDarkButtonTextStyle20
+              : kLightButtonTextStyle20,
+        ),
+      ),
+    );
+  }
+
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: Column(
@@ -112,6 +137,7 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
                         SizedBox(
                           height: _height * 0.06,
                         ),
+                        _buildSignInBtn(),
                       ],
                     ),
                   ),

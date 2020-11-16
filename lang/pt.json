@@ -9,12 +9,14 @@
         "text_step2": "Compartilhe momentos, experiência e amizades",
         "text_step3": "Seja o que você quiser, se comunique e aprenda com os outros"
     },
-    "login": {
+    "signIn": {
+        "title": "Sign In",
         "email": "E-mail",
         "password": "Senha",
         "recovery": "Esqueceu a Senha",
         "remember": "Lembrar",
-        "or": "ou"
+        "or": "ou",
+        "submit" : "ENTRAR"
     },
     "register": "Registro"
 }

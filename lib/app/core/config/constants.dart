@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final kDarkButtonTextStyle20 = GoogleFonts.oxygen(
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+  color: Colors.white,
+);
+
+final kLightButtonTextStyle20 = GoogleFonts.oxygen(
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+  color: Colors.white,
+);
+
 final kFontTextStyle20 = GoogleFonts.oxygen(
   fontSize: 20,
   fontWeight: FontWeight.w400,
@@ -13,15 +25,16 @@ final kFontTextStyle30 = GoogleFonts.oxygen(
   color: Colors.white,
 );
 
-final kLabelStyle = TextStyle(
+final kLabelStyle = GoogleFonts.oxygen(
+  //fontSize: 30,
+  fontWeight: FontWeight.w400,
   color: Colors.white,
-  fontWeight: FontWeight.bold,
-  fontFamily: 'OpenSans',
 );
 
-final kHintTextStyle = TextStyle(
-  color: Colors.white54,
-  fontFamily: 'OpenSans',
+final kHintTextStyle = GoogleFonts.oxygen(
+  //fontSize: 30,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
 );
 
 final kBoxDecorationStyle = BoxDecoration(

@@ -66,6 +66,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   autofocus: false,
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -80,7 +83,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     //border: InputBorder.none,
-                    labelText: AppTranslate(context).text('login.email'),
+                    labelText: AppTranslate(context).text('signIn.email'),
                     labelStyle: kLabelStyle,
                     contentPadding: EdgeInsets.only(
                       top: kDefaultPaddin * 0.0,
@@ -153,7 +156,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   keyboardType: TextInputType.text,
                   style: TextStyle(
                     color: Colors.white,
-                    fontFamily: 'OpenSans',
                   ),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
@@ -169,7 +171,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     //border: InputBorder.none,
-                    labelText: AppTranslate(context).text('login.password'),
+                    labelText: AppTranslate(context).text('signIn.password'),
                     labelStyle: kLabelStyle,
                     contentPadding: EdgeInsets.only(
                       top: kDefaultPaddin * 0.0,
@@ -221,7 +223,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
         onPressed: () => print('Forgot Password Button Pressed'),
         padding: EdgeInsets.only(right: 0.0),
         child: Text(
-          AppTranslate(context).text('login.recovery'),
+          AppTranslate(context).text('signIn.recovery'),
           style: kLabelStyle,
         ),
       ),
@@ -247,7 +249,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
             ),
           ),
           Text(
-            AppTranslate(context).text('login.recovery'),
+            AppTranslate(context).text('signIn.recovery'),
             style: kLabelStyle,
           ),
         ],
@@ -255,7 +257,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
     );
   }
 
-  Widget _buildLoginBtn() {
+  Widget _buildSignInBtn() {
     return Observer(
         name: 'submitButtonObserver',
         builder: (_) {
@@ -276,16 +278,13 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              color: Colors.white,
+              color: Colors.blue,
               child: Text(
-                !_submmiting ? 'LOGIN' : 'Verificando ...',
-                style: TextStyle(
-                  color: Color(0xFF527DAA),
-                  letterSpacing: 1.5,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'OpenSans',
-                ),
+                AppTranslate(context).text('signIn.submit'),
+                // ignore: lines_longer_than_80_chars
+                style: controller.appController.isDark
+                    ? kDarkButtonTextStyle20
+                    : kLightButtonTextStyle20,
               ),
             ),
           );
@@ -309,7 +308,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
             ),
           ),
           Text(
-            AppTranslate(context).text('login.or'),
+            AppTranslate(context).text('signIn.or'),
           ),
           Expanded(
             child: Padding(
@@ -542,13 +541,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         //),
                         _buildAuthLogo(),
                         Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'OpenSans',
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          AppTranslate(context).text('signIn.title'),
+                          style: kFontTextStyle30,
                         ),
                         SizedBox(
                           height: kDefaultPaddin * 0.5,
@@ -560,7 +554,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         _buildPasswordTF(),
                         _buildForgotPasswordBtn(),
                         _buildRememberMeCheckbox(),
-                        _buildLoginBtn(),
+                        _buildSignInBtn(),
                         // ignore: lines_longer_than_80_chars
                         //_buildSignInWithText(),
                         _divider(),
