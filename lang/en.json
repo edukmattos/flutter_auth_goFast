@@ -10,16 +10,25 @@
         "text_step3": "Whatever you want, communicate and learn from others"
     },
     "signIn": {
-        "title": "SiGeS",
-        "subTitle": "Sign In",
+        "title": "Sign In",
+        "subTitle": "SiGeS",
         "email": "Email",
         "password": "Password",
+        "register": " Register",
         "recovery": "Forgot Password",
         "remember": "Remember me",
+        "dont_have_account": "Don't you have a account ?",
         "or": "or",
         "submit" : "LOGIN"
     },
-    "register": "New Account",
+    "register": {
+        "title": "Register",
+        "subTitle": "SiGeS",
+        "email": "Email",
+        "password": "Password",
+        "passwordConfirm": "Confirm Password",
+        "submit" : "REGISTER"
+    },
     "field": {
         "required": "Required"
     },

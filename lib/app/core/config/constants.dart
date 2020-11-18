@@ -25,6 +25,18 @@ final kLightButtonTextStyle20 = GoogleFonts.oxygen(
   color: Colors.white,
 );
 
+final kFontTextStyle10 = GoogleFonts.oxygen(
+  fontSize: 10,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+final kFontTextStyle15 = GoogleFonts.oxygen(
+  fontSize: 15,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
 final kFontTextStyle20 = GoogleFonts.oxygen(
   fontSize: 20,
   fontWeight: FontWeight.w400,

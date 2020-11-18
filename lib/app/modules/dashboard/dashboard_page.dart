@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/app/widgets/drawer/app_drawer_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../app_controller.dart';
 import '../../core/config/constants.dart';
 import '../../core/features/localization/app_translate.dart';
+import '../../widgets/drawer/app_drawer_widget.dart';
 import 'dashboard_controller.dart';
 
 class DashboardPage extends StatefulWidget {

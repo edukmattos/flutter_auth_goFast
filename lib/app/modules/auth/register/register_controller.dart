@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
@@ -6,17 +5,17 @@ import 'package:mobx/mobx.dart';
 import '../../../app_controller.dart';
 import '../../shared/auth/repositories/interfaces/auth_repository_interface.dart';
 
-part 'login_controller.g.dart';
+part 'register_controller.g.dart';
 
 @Injectable()
-class LoginController = _LoginControllerBase with _$LoginController;
+class RegisterController = _RegisterControllerBase with _$RegisterController;
 
-abstract class _LoginControllerBase with Store {
+abstract class _RegisterControllerBase with Store {
   IAuthRepository authRepository;
 
   final AppController appController;
 
-  _LoginControllerBase(this.appController) {
+  _RegisterControllerBase(this.appController) {
     authRepository = Modular.get<IAuthRepository>();
   }
 
@@ -37,6 +36,13 @@ abstract class _LoginControllerBase with Store {
   // ignore: type_annotate_public_apis
   changePassword(String value) => password = value;
 
+  @observable
+  String passwordConfirm = "";
+
+  @action
+  // ignore: type_annotate_public_apis
+  changePasswordConfirm(String value) => passwordConfirm = value;
+
   @computed
   bool get isFormValid {
     return validateEmail() == null && validatePassword() == null;
@@ -53,12 +59,24 @@ abstract class _LoginControllerBase with Store {
 
   String validatePassword() {
     if (validatorRequired(password)) return "Obrigatorio.";
+    if (password != passwordConfirm) return "Senhas diferentes.";
+    return null;
+  }
+
+  String validatePasswordConfirm() {
+    if (validatorRequired(passwordConfirm)) return "Obrigatorio.";
+    if (password != passwordConfirm) return "Senhas diferentes.";
     return null;
   }
 
   @action
-  Future<void> loginCtrlGoogleSignIn() async {
-    await authRepository.signInGoogle().then((value) {
+  Future<void> registerCtrlSignUp({String email, String password}) async {
+    await authRepository
+        .signUpEmailPassword(
+      email: email,
+      password: password,
+    )
+        .then((value) {
       if (value.success) {
         Modular.to.pushNamed('/dashboard');
       } else {
@@ -66,8 +84,4 @@ abstract class _LoginControllerBase with Store {
       }
     });
   }
-
-  @action
-  Future<void> loginCtrlEmailPasswordSignIn(
-      {@required String email, @required String password}) {}
 }

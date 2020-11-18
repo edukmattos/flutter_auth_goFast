@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/config/app_config.dart';
 import '../../../../core/config/constants.dart';
@@ -103,15 +102,6 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        //Text(
-                        //  'Autenticação',
-                        //  style: TextStyle(
-                        //    color: Colors.white,
-                        //    fontFamily: 'OpenSans',
-                        //    fontSize: 30.0,
-                        //    fontWeight: FontWeight.bold,
-                        //  ),
-                        //),
                         SizedBox(
                           height: kDefaultPaddin * 1.0,
                         ),

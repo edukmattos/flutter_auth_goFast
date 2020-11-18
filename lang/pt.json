@@ -14,12 +14,21 @@
         "subTitle": "Entrar",
         "email": "E-mail",
         "password": "Senha",
+        "register": " Registre-se",
         "recovery": "Esqueceu a Senha",
         "remember": "Lembrar",
+        "dont_have_account": "Você não tem conta ?",
         "or": "ou",
         "submit" : "ENTRAR"
     },
-    "register": "Registro",
+    "register": {
+        "title": "Registro",
+        "subTitle": "Registro",
+        "email": "E-mail",
+        "password": "Senha",
+        "passwordConfirm": "Confirmar Senha",
+        "submit" : "REGISTRAR"
+    },
     "field": {
         "required": "Required"
     },

@@ -7,6 +7,8 @@ import 'app_widget.dart';
 import 'core/interfaces/shared_repository_interface.dart';
 import 'core/repositories/shared_repository.dart';
 import 'modules/auth/login/login_module.dart';
+import 'modules/auth/register/register_controller.dart';
+import 'modules/auth/register/register_module.dart';
 import 'modules/dashboard/dashboard_module.dart';
 import 'modules/shared/auth/repositories/auth_repository.dart';
 import 'modules/shared/auth/repositories/interfaces/auth_repository_interface.dart';
@@ -31,6 +33,7 @@ class AppModule extends MainModule {
         $WelcomeController,
         $ContactController,
         $AboutController,
+        $RegisterController,
       ];
 
   @override
@@ -39,6 +42,7 @@ class AppModule extends MainModule {
         ModularRouter("/start", module: StartModule()),
         ModularRouter("/home", module: HomeModule()),
         ModularRouter("/login", module: LoginModule()),
+        ModularRouter("/register", module: RegisterModule()),
         ModularRouter("/dashboard", module: DashboardModule()),
       ];
 
