@@ -81,6 +81,16 @@ mixin _$LoginController on _LoginControllerBase, Store {
         .run(() => super.loginCtrlGoogleSignIn());
   }
 
+  final _$loginCtrlEmailPasswordSignInAsyncAction =
+      AsyncAction('_LoginControllerBase.loginCtrlEmailPasswordSignIn');
+
+  @override
+  Future<void> loginCtrlEmailPasswordSignIn(
+      {@required String email, @required String password}) {
+    return _$loginCtrlEmailPasswordSignInAsyncAction.run(() =>
+        super.loginCtrlEmailPasswordSignIn(email: email, password: password));
+  }
+
   final _$_LoginControllerBaseActionController =
       ActionController(name: '_LoginControllerBase');
 
@@ -101,19 +111,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
         name: '_LoginControllerBase.changePassword');
     try {
       return super.changePassword(value);
-    } finally {
-      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<void> loginCtrlEmailPasswordSignIn(
-      {@required String email, @required String password}) {
-    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
-        name: '_LoginControllerBase.loginCtrlEmailPasswordSignIn');
-    try {
-      return super
-          .loginCtrlEmailPasswordSignIn(email: email, password: password);
     } finally {
       _$_LoginControllerBaseActionController.endAction(_$actionInfo);
     }

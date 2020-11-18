@@ -35,5 +35,8 @@
     "dashboard": {
         "title": "DashBoard",
         "subTitle": "Sign In"
+    },
+    "drawer": {
+        "logout": "Logout"
     }
 }

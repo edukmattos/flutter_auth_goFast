@@ -28,14 +28,15 @@ class AppModule extends MainModule {
           (i) => AuthRepository(firebaseAuth),
         ),
         $AppController,
-        $WelcomeController,
-        $ContactController,
-        $AboutController,
+        //$WelcomeController,
+        //$ContactController,
+        //$AboutController,
       ];
 
   @override
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, module: SplashModule()),
+        ModularRouter("/", module: SplashModule()),
         ModularRouter("/start", module: StartModule()),
         //ModularRouter("/home", module: HomeModule()),
         ModularRouter("/login", module: LoginModule()),

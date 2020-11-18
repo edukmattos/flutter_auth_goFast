@@ -26,11 +26,11 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
     Future.delayed(Duration(seconds: 3));
     var authRepository = Modular.get<IAuthRepository>();
     var response = await authRepository.getUser();
-    UserCredential user = response.object;
+    var user = response.object;
     if (user == null) {
       Modular.to.pushNamed('/start');
     } else {
-      Modular.to.pushNamed('/dashbord');
+      Modular.to.pushNamed('/dashboard');
     }
   }
 

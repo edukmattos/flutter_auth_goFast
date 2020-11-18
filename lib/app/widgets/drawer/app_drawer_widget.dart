@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/app/core/config/constants.dart';
+import 'package:flutter_auth/app/core/features/localization/app_translate.dart';
 import 'app_drawer_header_widget.dart';
 import 'app_drawer_item_widget.dart';
 
@@ -42,8 +44,9 @@ class AppDrawerWidget extends StatelessWidget {
           ),
           Divider(),
           appDrawerItemWidget(
-            icon: Icons.bug_report,
-            text: 'Report an issue',
+            icon: Icons.logout,
+            text: AppTranslate(context).text('drawer.logout'),
+            onTap: () {},
           ),
           ListTile(
             title: Text('0.0.1'),

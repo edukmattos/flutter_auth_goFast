@@ -35,5 +35,8 @@
     "dashboard": {
         "title": "Painel Controle",
         "subTitle": "Sign In"
+    },
+    "drawer": {
+        "logout": "Sair"
     }
 }

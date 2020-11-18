@@ -92,7 +92,8 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
       AsyncAction('_RegisterControllerBase.registerCtrlSignUp');
 
   @override
-  Future<void> registerCtrlSignUp({String email, String password}) {
+  Future<void> registerCtrlSignUp(
+      {@required String email, @required String password}) {
     return _$registerCtrlSignUpAsyncAction
         .run(() => super.registerCtrlSignUp(email: email, password: password));
   }
