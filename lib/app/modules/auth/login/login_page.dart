@@ -10,7 +10,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import '../../../core/config/app_config.dart';
 import '../../../core/config/constants.dart';
 import '../../../core/features/localization/app_translate.dart';
-import '../../shared/auth/repositories/interfaces/auth_repository_interface.dart';
 import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -368,13 +367,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
       child: GoogleSignInButton(
         darkMode: controller.appController.isDark,
         onPressed: () async {
-          await Modular.get<IAuthRepository>().signInGoogle().then((result) {
-            if (result.success) {
-              print(result.message);
-            } else {
-              print(result.message);
-            }
-          });
+          controller.loginCtrlGoogleSignIn();
         },
       ),
     );

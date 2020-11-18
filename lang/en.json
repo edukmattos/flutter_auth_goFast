@@ -22,5 +22,9 @@
     "register": "New Account",
     "field": {
         "required": "Required"
+    },
+    "dashboard": {
+        "title": "DashBoard",
+        "subTitle": "Sign In"
     }
 }

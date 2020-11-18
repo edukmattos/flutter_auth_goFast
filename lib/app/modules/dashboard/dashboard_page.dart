@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/app/modules/shared/auth/repositories/interfaces/auth_repository_interface.dart';
+import 'package:flutter_auth/app/widgets/drawer/app_drawer_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import '../../app_controller.dart';
+import '../../core/config/constants.dart';
+import '../../core/features/localization/app_translate.dart';
 import 'dashboard_controller.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -24,12 +26,40 @@ class _DashboardPageState
   //use 'controller' variable to access controller
 
   @override
+  int _selectedIndex = 0;
+
   Widget build(BuildContext context) {
+    var appBar = AppBar(
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            AppTranslate(context).text('signIn.title'),
+            style: kPageTitleTextStyle20,
+          ),
+          Visibility(
+            visible: true,
+            child: Text(
+              AppTranslate(context).text('signIn.subTitle'),
+              style: kPageSubTitleTextStyle14,
+            ),
+          )
+        ],
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: GoogleFonts.pacifico(),
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              AppTranslate(context).text('dashboard.title'),
+              style: kPageTitleTextStyle20,
+            ),
+          ],
         ),
         actions: [
           Observer(
@@ -44,27 +74,22 @@ class _DashboardPageState
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              child: Text('Login Google'),
-              onPressed: () async {
-                await Modular.get<IAuthRepository>()
-                    .signInGoogle()
-                    .then((result) {
-                  if (result.success) {
-                    print(result.message);
-                  } else {
-                    print(result.message);
-                  }
-                });
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: AppDrawerWidget(),
+      body: _getDrawerItem(_selectedIndex),
     );
+  }
+
+  _getDrawerItem(int pos) {
+    switch (pos) {
+      case 0:
+      //return Fragment("Tela 1");
+      case 1:
+      //return Fragment("Tela 2");
+    }
+  }
+
+  _onSelectItem(int index) {
+    setState(() => _selectedIndex = index);
+    Navigator.of(context).pop();
   }
 }

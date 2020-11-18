@@ -4,6 +4,7 @@ import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../app_controller.dart';
+import '../../shared/auth/repositories/interfaces/auth_repository_interface.dart';
 
 part 'login_controller.g.dart';
 
@@ -11,9 +12,13 @@ part 'login_controller.g.dart';
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
+  IAuthRepository authRepository;
+
   final AppController appController;
 
-  _LoginControllerBase(this.appController);
+  _LoginControllerBase(this.appController) {
+    authRepository = Modular.get<IAuthRepository>();
+  }
 
   String errorTitle = "";
   String errorMsg = "";
@@ -55,7 +60,15 @@ abstract class _LoginControllerBase with Store {
   }
 
   @action
-  Future<void> loginCtrlGoogleSignIn() async {}
+  Future<void> loginCtrlGoogleSignIn() async {
+    await authRepository.signInGoogle().then((value) {
+      if (value.success) {
+        Modular.to.pushNamed('/dashboard');
+      } else {
+        print(value.message);
+      }
+    });
+  }
 
   @action
   Future<void> loginCtrlEmailPasswordSignIn(

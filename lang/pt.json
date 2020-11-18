@@ -19,5 +19,12 @@
         "or": "ou",
         "submit" : "ENTRAR"
     },
-    "register": "Registro"
+    "register": "Registro",
+    "field": {
+        "required": "Required"
+    },
+    "dashboard": {
+        "title": "Painel Controle",
+        "subTitle": "Sign In"
+    }
 }

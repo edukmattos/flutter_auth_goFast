@@ -84,6 +84,7 @@ flutter:
     - lang/
   #  - assets/images/
   #  - assets/logos/logo.png
+    - assets/images/app/drawer_header_background.png
     - assets/images/logos/app_logo.png
     - assets/images/logos/facebook.jpg
     - assets/images/logos/google.jpg
