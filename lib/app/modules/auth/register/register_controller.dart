@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
@@ -70,17 +71,20 @@ abstract class _RegisterControllerBase with Store {
   }
 
   @action
-  Future<void> registerCtrlSignUp({String email, String password}) async {
+  Future<void> registerCtrlSignUp({
+    @required String email,
+    @required String password,
+  }) async {
     await authRepository
         .signUpEmailPassword(
-      email: email,
-      password: password,
+      email: email.trim(),
+      password: password.trim(),
     )
-        .then((value) {
-      if (value.success) {
+        .then((response) {
+      if (response.success) {
         Modular.to.pushNamed('/dashboard');
       } else {
-        print(value.message);
+        throw response;
       }
     });
   }

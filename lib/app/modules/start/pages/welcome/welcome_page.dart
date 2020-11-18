@@ -25,7 +25,6 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
 
   int currentIndex = 0;
 
-  @override
   Widget _buildSignInBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
@@ -51,6 +50,7 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;

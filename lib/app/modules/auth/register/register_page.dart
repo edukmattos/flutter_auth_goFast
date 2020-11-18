@@ -20,7 +20,6 @@ class _RegisterPageState
     extends ModularState<RegisterPage, RegisterController> {
   //use 'controller' variable to access controller
 
-  @override
   Widget _buildEmailTF() {
     return Observer(
       name: 'observerEmail',
@@ -28,11 +27,6 @@ class _RegisterPageState
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            //Text(
-            //  'E-mail',
-            //  style: kLabelStyle,
-            //),
-            //SizedBox(height: kDefaultPaddin * 0.5),
             Container(
               alignment: Alignment.centerLeft,
               decoration: controller.appController.isDark
@@ -319,6 +313,7 @@ class _RegisterPageState
         });
   }
 
+  @override
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: Column(

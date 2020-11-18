@@ -69,5 +69,18 @@ abstract class _LoginControllerBase with Store {
 
   @action
   Future<void> loginCtrlEmailPasswordSignIn(
-      {@required String email, @required String password}) {}
+      {@required String email, @required String password}) async {
+    await authRepository
+        .signInEmailPassword(
+      email: email.trim(),
+      password: password.trim(),
+    )
+        .then((response) {
+      if (response.success) {
+        Modular.to.pushNamed('/dashborad');
+      } else {
+        throw response;
+      }
+    });
+  }
 }

@@ -1,9 +1,8 @@
-import 'package:dio/dio.dart';
-import 'repositories/dashboard_repository.dart';
-import 'dashboard_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'dashboard_controller.dart';
 import 'dashboard_page.dart';
+import 'repositories/dashboard_repository.dart';
 
 class DashboardModule extends ChildModule {
   @override

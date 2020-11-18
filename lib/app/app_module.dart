@@ -7,16 +7,15 @@ import 'app_widget.dart';
 import 'core/interfaces/shared_repository_interface.dart';
 import 'core/repositories/shared_repository.dart';
 import 'modules/auth/login/login_module.dart';
-import 'modules/auth/register/register_controller.dart';
 import 'modules/auth/register/register_module.dart';
 import 'modules/dashboard/dashboard_module.dart';
 import 'modules/shared/auth/repositories/auth_repository.dart';
 import 'modules/shared/auth/repositories/interfaces/auth_repository_interface.dart';
+import 'modules/splash/splash_module.dart';
 import 'modules/start/pages/about/about_controller.dart';
 import 'modules/start/pages/contact/contact_controller.dart';
 import 'modules/start/pages/welcome/welcome_controller.dart';
 import 'modules/start/start_module.dart';
-import 'modules/temp/home/home_module.dart';
 
 class AppModule extends MainModule {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -29,18 +28,16 @@ class AppModule extends MainModule {
           (i) => AuthRepository(firebaseAuth),
         ),
         $AppController,
-        //$SplashController,
         $WelcomeController,
         $ContactController,
         $AboutController,
-        $RegisterController,
       ];
 
   @override
   List<ModularRouter> get routers => [
-        ModularRouter(Modular.initialRoute, module: StartModule()),
+        ModularRouter(Modular.initialRoute, module: SplashModule()),
         ModularRouter("/start", module: StartModule()),
-        ModularRouter("/home", module: HomeModule()),
+        //ModularRouter("/home", module: HomeModule()),
         ModularRouter("/login", module: LoginModule()),
         ModularRouter("/register", module: RegisterModule()),
         ModularRouter("/dashboard", module: DashboardModule()),
