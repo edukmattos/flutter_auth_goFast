@@ -28,7 +28,7 @@ class AppModule extends MainModule {
           (i) => AuthRepository(firebaseAuth),
         ),
         $AppController,
-        //$WelcomeController,
+        $WelcomeController,
         //$ContactController,
         //$AboutController,
       ];

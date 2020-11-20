@@ -30,6 +30,7 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
     if (user == null) {
       Modular.to.pushNamed('/start');
     } else {
+      //authRepository.signOut();
       Modular.to.pushNamed('/dashboard');
     }
   }

@@ -4,20 +4,32 @@ Widget appDrawerHeaderWidget() {
   return DrawerHeader(
     margin: EdgeInsets.zero,
     padding: EdgeInsets.zero,
-    //decoration: BoxDecoration(
-    //  image: DecorationImage(
-    //    fit: BoxFit.fill,
-    //    image: AssetImage('assets/images/app/drawer_header_background.png'),
-    //  ),
-    //),
     child: Stack(
       children: <Widget>[
         UserAccountsDrawerHeader(
-          accountEmail: Text("user@mail.com"),
-          accountName: Text("Seu zé"),
+          accountName: Text('Eduardo Mattos'),
+          accountEmail: Text('edukmattos@gmail.com'),
           currentAccountPicture: CircleAvatar(
-            child: Text("SZ"),
+            child: Text('EM'),
           ),
+          otherAccountsPictures: <Widget>[
+            RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                side: BorderSide(color: Colors.red),
+              ),
+              onPressed: () {},
+              color: Colors.red,
+              textColor: Colors.white,
+              child: Text(
+                "Buy now".toUpperCase(),
+                style: TextStyle(fontSize: 14),
+              ),
+            ),
+            CircleAvatar(
+              child: Text('K'),
+            ),
+          ],
         ),
       ],
     ),

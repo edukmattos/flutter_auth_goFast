@@ -46,7 +46,9 @@ abstract class _RegisterControllerBase with Store {
 
   @computed
   bool get isFormValid {
-    return validateEmail() == null && validatePassword() == null;
+    return validateEmail() == null &&
+        validatePassword() == null &&
+        validatePasswordConfirm() == null;
   }
 
   String validateEmail() {
@@ -60,7 +62,6 @@ abstract class _RegisterControllerBase with Store {
 
   String validatePassword() {
     if (validatorRequired(password)) return "Obrigatorio.";
-    if (password != passwordConfirm) return "Senhas diferentes.";
     return null;
   }
 

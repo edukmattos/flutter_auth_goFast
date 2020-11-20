@@ -212,7 +212,7 @@ class _RegisterPageState
               child: Padding(
                 padding: EdgeInsets.only(top: kDefaultPaddin * 0.00),
                 child: TextFormField(
-                  onChanged: controller.changePassword,
+                  onChanged: controller.changePasswordConfirm,
                   autofocus: false,
                   obscureText: true,
                   keyboardType: TextInputType.text,
@@ -255,10 +255,10 @@ class _RegisterPageState
                         top: kDefaultPaddin * 1.00,
                         end: kDefaultPaddin * 0.25,
                       ),
-                      child: controller.validatePassword() == null
+                      child: controller.validatePasswordConfirm() == null
                           ? null
                           : Text(
-                              controller.validatePassword(),
+                              controller.validatePasswordConfirm(),
                               style: TextStyle(
                                   color: Colors.red,
                                   fontFamily: 'OpenSans',
