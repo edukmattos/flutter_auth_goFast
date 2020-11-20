@@ -8,5 +8,9 @@ class DefaultResponse<T> {
   bool get success => status == ResponseStatus.rsSuccess;
   bool get failed => status == ResponseStatus.rsFailed;
 
-  DefaultResponse({this.object, this.message, this.status});
+  DefaultResponse({
+    this.object,
+    this.message,
+    this.status,
+  });
 }

@@ -19,7 +19,8 @@
         "remember": "Remember me",
         "dont_have_account": "Don't you have an account ?",
         "or": "or",
-        "submit" : "LOGIN"
+        "submit" : "LOGIN",
+        "user_disabled": "User disabled"
     },
     "register": {
         "title": "Register",

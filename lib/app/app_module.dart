@@ -12,8 +12,6 @@ import 'modules/dashboard/dashboard_module.dart';
 import 'modules/shared/auth/repositories/auth_repository.dart';
 import 'modules/shared/auth/repositories/interfaces/auth_repository_interface.dart';
 import 'modules/splash/splash_module.dart';
-import 'modules/start/pages/about/about_controller.dart';
-import 'modules/start/pages/contact/contact_controller.dart';
 import 'modules/start/pages/welcome/welcome_controller.dart';
 import 'modules/start/start_module.dart';
 

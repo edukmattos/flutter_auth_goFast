@@ -20,6 +20,8 @@ class _RegisterPageState
     extends ModularState<RegisterPage, RegisterController> {
   //use 'controller' variable to access controller
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   Widget _buildEmailTF() {
     return Observer(
       name: 'observerEmail',
@@ -290,10 +292,18 @@ class _RegisterPageState
               elevation: 5.0,
               onPressed: controller.isFormValid
                   ? () async {
-                      controller.registerCtrlSignUp(
+                      controller
+                          .registerCtrlSignUp(
                         email: controller.email,
                         password: controller.password,
-                      );
+                      )
+                          .catchError((error) {
+                        var scnackbar = SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          content: Text(error.message),
+                        );
+                        _scaffoldKey.currentState.showSnackBar(scnackbar);
+                      });
                     }
                   : null,
               padding: EdgeInsets.all(10.0),
@@ -337,6 +347,7 @@ class _RegisterPageState
 
     return Scaffold(
       appBar: appBar,
+      key: _scaffoldKey,
       //floatingActionButton: _buildSpeedDial(),
       //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       //bottomNavigationBar: _buildBottomBar(),

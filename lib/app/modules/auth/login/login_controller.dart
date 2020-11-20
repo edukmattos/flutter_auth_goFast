@@ -58,18 +58,20 @@ abstract class _LoginControllerBase with Store {
 
   @action
   Future<void> loginCtrlGoogleSignIn() async {
-    await authRepository.signInGoogle().then((value) {
-      if (value.success) {
+    await authRepository.signInGoogle().then((response) {
+      if (response.success) {
         Modular.to.pushNamed('/dashboard');
       } else {
-        print(value.message);
+        throw response;
       }
     });
   }
 
   @action
-  Future<void> loginCtrlEmailPasswordSignIn(
-      {@required String email, @required String password}) async {
+  Future<void> loginCtrlEmailPasswordSignIn({
+    @required String email,
+    @required String password,
+  }) async {
     await authRepository
         .signInEmailPassword(
       email: email.trim(),

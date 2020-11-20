@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../../core/errors/auth_sign_in_error_interceptor.dart';
+import '../../../../core/errors/auth_sign_up_error_interceptor.dart';
 import '../../../../core/features/responses/response_builder.dart';
 import '../../../../core/features/responses/response_default.dart';
 import 'interfaces/auth_repository_interface.dart';
@@ -39,6 +41,7 @@ class AuthRepository implements IAuthRepository {
       return ResponseBuilder.failed(
         object: e,
         message: e.toString(),
+        errorInterceptor: AuthSignInErrorInterceptor(),
       );
     }
   }
@@ -71,6 +74,7 @@ class AuthRepository implements IAuthRepository {
       return ResponseBuilder.failed(
         object: e,
         message: e.toString(),
+        errorInterceptor: AuthSignInErrorInterceptor(),
       );
     }
   }
@@ -103,6 +107,7 @@ class AuthRepository implements IAuthRepository {
       return ResponseBuilder.failed(
         object: e,
         message: e.toString(),
+        errorInterceptor: AuthSignUpErrorInterceptor(),
       );
     }
   }

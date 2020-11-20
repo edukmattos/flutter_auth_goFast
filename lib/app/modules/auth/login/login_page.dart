@@ -25,6 +25,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
   bool _rememberMe = false;
   bool _submmiting = false;
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   Widget _buildAuthLogo() {
     return CircleAvatar(
       backgroundColor: Colors.transparent,
@@ -260,9 +262,18 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
               elevation: 5.0,
               onPressed: controller.isFormValid
                   ? () async {
-                      controller.loginCtrlEmailPasswordSignIn(
+                      controller
+                          .loginCtrlEmailPasswordSignIn(
                         email: controller.email,
                         password: controller.password,
+                      )
+                          .catchError(
+                        (error) {
+                          var scnackbar = SnackBar(
+                            content: Text(error.message),
+                          );
+                          _scaffoldKey.currentState.showSnackBar(scnackbar);
+                        },
                       );
                     }
                   : null,
@@ -290,7 +301,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
       child: GoogleSignInButton(
         darkMode: controller.appController.isDark,
         onPressed: () async {
-          controller.loginCtrlGoogleSignIn();
+          controller.loginCtrlGoogleSignIn().catchError(
+            (error) {
+              var scnackbar = SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Text(error.message),
+              );
+              _scaffoldKey.currentState.showSnackBar(scnackbar);
+            },
+          );
         },
       ),
     );
@@ -347,6 +366,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
     );
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: appBar,
       //floatingActionButton: _buildSpeedDial(),
       //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
