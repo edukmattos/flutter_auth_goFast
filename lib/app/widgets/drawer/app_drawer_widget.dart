@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/app/core/config/constants.dart';
-import 'package:flutter_auth/app/core/features/localization/app_translate.dart';
+
+import '../../core/features/localization/app_translate.dart';
 import 'app_drawer_header_widget.dart';
 import 'app_drawer_item_widget.dart';
 

@@ -70,10 +70,10 @@ class AuthRepository implements IAuthRepository {
         message: "Logado com sucesso !",
       );
       // ignore: avoid_catches_without_on_clauses
-    } on Exception catch (e) {
+    } on FirebaseAuthException catch (e) {
       return ResponseBuilder.failed(
         object: e,
-        message: e.toString(),
+        message: e.code,
         errorInterceptor: AuthSignInErrorInterceptor(),
       );
     }

@@ -304,8 +304,14 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
           controller.loginCtrlGoogleSignIn().catchError(
             (error) {
               var scnackbar = SnackBar(
+                duration: Duration(seconds: 3),
+                content: Text(
+                  error.message,
+                  style: kFontTextStyle15,
+                ),
+                backgroundColor: Colors.red,
                 behavior: SnackBarBehavior.floating,
-                content: Text(error.message),
+                elevation: double.maxFinite,
               );
               _scaffoldKey.currentState.showSnackBar(scnackbar);
             },
