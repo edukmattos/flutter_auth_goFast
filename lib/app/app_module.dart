@@ -8,6 +8,7 @@ import 'core/interfaces/shared_repository_interface.dart';
 import 'core/repositories/shared_repository.dart';
 import 'modules/auth/login/login_module.dart';
 import 'modules/auth/register/register_module.dart';
+import 'modules/client/client_list/client_list_module.dart';
 import 'modules/dashboard/dashboard_module.dart';
 import 'modules/shared/auth/repositories/auth_repository.dart';
 import 'modules/shared/auth/repositories/interfaces/auth_repository_interface.dart';
@@ -40,6 +41,7 @@ class AppModule extends MainModule {
         ModularRouter("/login", module: LoginModule()),
         ModularRouter("/register", module: RegisterModule()),
         ModularRouter("/dashboard", module: DashboardModule()),
+        ModularRouter("/clients/list", module: ClientListModule()),
       ];
 
   @override

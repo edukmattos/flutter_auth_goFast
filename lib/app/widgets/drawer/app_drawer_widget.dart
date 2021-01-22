@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/features/localization/app_translate.dart';
 import 'app_drawer_header_widget.dart';
@@ -13,9 +14,11 @@ class AppDrawerWidget extends StatelessWidget {
         children: <Widget>[
           appDrawerHeaderWidget(),
           appDrawerItemWidget(
-            icon: Icons.contacts,
-            text: 'Contacts',
-          ),
+              icon: Icons.contacts,
+              text: 'Contacts',
+              onTap: () {
+                Modular.to.pushNamed('/units_measure/list');
+              }),
           appDrawerItemWidget(
             icon: Icons.event,
             text: 'Events',
