@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:material_tag_editor/tag_editor.dart';
+
+import '../../../core/config/app_config.dart';
 import 'client_search_controller.dart';
 
 class ClientSearchPage extends StatefulWidget {
   final String title;
-  const ClientSearchPage({Key key, this.title = "Clientes"}) : super(key: key);
+  final String subtitle;
+
+  const ClientSearchPage(
+      {Key key,
+      this.title = appPageTagClient,
+      this.subtitle = appPageTagFunctionSearch})
+      : super(key: key);
 
   @override
   _ClientSearchPageState createState() => _ClientSearchPageState();
@@ -30,31 +38,30 @@ class _ClientSearchPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    var appBar = AppBar(
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(widget.title),
+          Visibility(
+            visible: true,
+            child: Text(
+              widget.subtitle,
+              style: TextStyle(fontSize: 12.0),
+            ),
+          )
+        ],
       ),
+    );
+
+    return Scaffold(
+      appBar: appBar,
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Card(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(2.0),
-                            child: Icon(Icons.thumb_up),
-                          ),
-                        ],
-                      ))
-                ],
-              ),
-            ),
             Align(
               alignment: Alignment.topLeft,
               child: DropdownButton<String>(
@@ -75,13 +82,6 @@ class _ClientSearchPageState
                 },
                 hint: Text('filtrar'),
                 value: _clientSearchFilters,
-              ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {},
               ),
             ),
             TagEditor(
@@ -115,6 +115,12 @@ class _ClientSearchPageState
                 onDeleted: onDelete,
               ),
             ),
+            FlatButton(
+              onPressed: () {},
+              child: Text(
+                "Enviar",
+              ),
+            )
           ],
         ),
       ),
