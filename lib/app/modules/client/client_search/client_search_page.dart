@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_auth/app/core/config/constants.dart';
+import 'package:flutter_auth/app/core/features/localization/app_translate.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:material_tag_editor/tag_editor.dart';
 
@@ -43,12 +45,15 @@ class _ClientSearchPageState
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(widget.title),
+          Text(
+            AppTranslate(context).text('clients.title'),
+            style: kPageTitleTextStyle20,
+          ),
           Visibility(
             visible: true,
             child: Text(
-              widget.subtitle,
-              style: TextStyle(fontSize: 12.0),
+              AppTranslate(context).text('operations.search'),
+              style: kPageSubTitleTextStyle14,
             ),
           )
         ],
@@ -57,6 +62,29 @@ class _ClientSearchPageState
 
     return Scaffold(
       appBar: appBar,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Modular.to.pushReplacementNamed('/clients/new');
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(

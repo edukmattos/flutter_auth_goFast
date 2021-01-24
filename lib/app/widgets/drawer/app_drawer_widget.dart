@@ -15,9 +15,9 @@ class AppDrawerWidget extends StatelessWidget {
           appDrawerHeaderWidget(),
           appDrawerItemWidget(
               icon: Icons.contacts,
-              text: 'Contacts',
+              text: AppTranslate(context).text('clients.title'),
               onTap: () {
-                Modular.to.pushNamed('/units_measure/list');
+                Modular.to.pushNamed('/clients/dashboard');
               }),
           appDrawerItemWidget(
             icon: Icons.event,

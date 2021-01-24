@@ -1,9 +1,8 @@
-import 'package:dio/native_imp.dart';
-import '../../../../models/client_model.dart';
-import '../../documents/clients_document.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
+import '../../../../models/client_model.dart';
+import '../../documents/clients_document.dart';
 import 'interfaces/client_search_repository_interface.dart';
 
 part 'client_search_repository.g.dart';

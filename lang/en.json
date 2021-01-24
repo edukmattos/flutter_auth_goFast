@@ -30,8 +30,21 @@
         "passwordConfirm": "Confirm Password",
         "submit" : "REGISTER"
     },
-    "field": {
-        "required": "Required"
+    "clients": {
+        "title": "Clients"
+    },
+    "fields": {
+        "required": "Required",
+        "einSsa": "EIN/SSA",
+        "name": "Name",
+        "email": "Email",
+        "submit": "SEND"
+    },
+    "operations": {
+        "new": "New",
+        "edit": "Edit",
+        "show": "Show",
+        "search": "Search"
     },
     "dashboard": {
         "title": "DashBoard",

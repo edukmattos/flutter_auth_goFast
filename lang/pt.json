@@ -29,8 +29,21 @@
         "passwordConfirm": "Confirmar Senha",
         "submit" : "REGISTRAR"
     },
-    "field": {
-        "required": "Required"
+    "clients": {
+        "title": "Clientes"
+    },
+    "fields": {
+        "required": "Required",
+        "einSsa": "CPF/CNPJ",
+        "name": "Nome",
+        "email": "E-mail",
+        "submit": "ENVIAR"
+    },
+    "operations": {
+        "new": "Inclusão",
+        "edit": "Alteração",
+        "show": "Consulta",
+        "search": "Pesquisa"
     },
     "dashboard": {
         "title": "Painel Controle",
