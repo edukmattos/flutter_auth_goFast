@@ -15,14 +15,7 @@ class ClientSearchRepository implements IClientSearchRepository {
 
   Future<Snapshot<List<ClientModel>>> searchClientEinSsaName() async {
     var query = docClientAll;
-
-    //print(docClientAll);
-
-    //query
-    //var snapshot = await _hasuraConnect.query(query);
-    //return ClientModel.fromJsonList(snapshot["data"]["clients"] as List);
-    //query
-
+    print("2222");
     //subscription
     var snapshot = await _hasuraConnect.subscription(query);
 

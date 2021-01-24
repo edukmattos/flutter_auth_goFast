@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_auth/app/core/config/constants.dart';
 import 'package:flutter_auth/app/core/features/localization/app_translate.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:material_tag_editor/tag_editor.dart';
 
@@ -36,6 +37,44 @@ class _ClientSearchPageState
     setState(() {
       values.removeAt(index);
     });
+  }
+
+  Widget _buildClientsResult() {
+    return Observer(
+      name: 'clientListObserver',
+      builder: (context) {
+        if (controller.clients.hasError) {
+          print(controller.clients.hasError);
+          return Center(
+            child: Text('Erro a realizar a pesquisa !'),
+          );
+        }
+
+        if (controller.clients.value == null) {
+          return Center(
+              child: CircularProgressIndicator(
+            backgroundColor: Colors.green,
+          ));
+        }
+
+        var list = controller.clients.value;
+        print(list);
+
+        return ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          reverse: false,
+          itemCount: controller.clients.value.length,
+          itemBuilder: (context, index) {
+            var model = list[index];
+
+            print(model.name);
+
+            return _getListTile(model);
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -148,12 +187,50 @@ class _ClientSearchPageState
               child: Text(
                 "Enviar",
               ),
-            )
+            ),
+            Divider(),
+            _buildClientsResult(),
           ],
         ),
       ),
     );
   }
+}
+
+ListTile _getListTile(model) {
+  print(model.einSsa);
+  return ListTile(
+    leading: _getLeadingWidget(),
+    title: _getTitleWidget('${model.name}'),
+    subtitle: _getSubtitleWidget('${model.einSsa}'),
+    isThreeLine: false,
+    trailing: Icon(Icons.keyboard_arrow_right, size: 40.0),
+    //selected: false,
+    onLongPress: () {
+      print("onLongPress");
+    },
+    onTap: () {
+      print("onLongPress");
+    },
+  );
+}
+
+CircleAvatar _getLeadingWidget() {
+  return CircleAvatar();
+}
+
+Text _getTitleWidget(String modelName) {
+  return Text(
+    modelName,
+    style: TextStyle(fontWeight: FontWeight.bold),
+  );
+}
+
+Text _getSubtitleWidget(String modelEinSSa) {
+  return Text(
+    modelEinSSa,
+    style: TextStyle(fontWeight: FontWeight.bold),
+  );
 }
 
 class _Chip extends StatelessWidget {
