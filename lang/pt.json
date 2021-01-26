@@ -30,7 +30,9 @@
         "submit" : "REGISTRAR"
     },
     "clients": {
-        "title": "Clientes"
+        "title": "Clientes",
+        "dashboard": "Painel Controle",
+        "searchSubmit": "Pesquisar"
     },
     "fields": {
         "required": "Required",

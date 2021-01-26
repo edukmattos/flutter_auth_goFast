@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_auth/app/core/config/constants.dart';
-import 'package:flutter_auth/app/core/features/localization/app_translate.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:material_tag_editor/tag_editor.dart';
 
 import '../../../core/config/app_config.dart';
+import '../../../core/config/constants.dart';
+import '../../../core/features/localization/app_translate.dart';
 import 'client_search_controller.dart';
 
 class ClientSearchPage extends StatefulWidget {
@@ -27,16 +27,92 @@ class _ClientSearchPageState
     extends ModularState<ClientSearchPage, ClientSearchController> {
   //use 'controller' variable to access controller
 
-  List<String> values = [];
+  List<String> clientsTags = [];
   final FocusNode _focusNode = FocusNode();
 
-  String _clientSearchFilters;
+  String clientsFilter = "clientsFilterNameEinSsa";
 
-  @override
   void onDelete(index) {
     setState(() {
-      values.removeAt(index);
+      clientsTags.removeAt(index);
     });
+  }
+
+  Widget _buildClientsSearch() {
+    return Form(
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(kDefaultPaddin * 0.5),
+          child: Column(
+            children: [
+              TagEditor(
+                autofocus: true,
+                length: clientsTags.length,
+                focusNode: _focusNode,
+                delimiters: [',', ';', '-', ' '],
+                hasAddButton: false,
+                resetTextOnSubmitted: true,
+                textStyle: TextStyle(
+                    //color: Colors.grey,
+                    ),
+                onSubmitted: (outstandingValue) {
+                  setState(
+                    () {
+                      clientsTags.add(outstandingValue);
+                    },
+                  );
+                },
+                inputDecoration: InputDecoration(
+                  //border: OutlineInputBorder(),
+                  //enabledBorder: OutlineInputBorder(),
+                  //focusedBorder: OutlineInputBorder(),
+                  hintText: 'Tags ...',
+                ),
+                //onTagChanged: controller.changeClientsTags,
+                onTagChanged: (newValue) {
+                  setState(() {
+                    clientsTags.add(newValue);
+                  });
+                },
+                tagBuilder: (context, index) => _Chip(
+                  index: index,
+                  label: clientsTags[index],
+                  onDeleted: onDelete,
+                ),
+              ),
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  DropdownButton<String>(
+                    isDense: false,
+                    items: [
+                      DropdownMenuItem<String>(
+                        child: Text('Nome/CPF/CNPJ'),
+                        value: 'clientsFilterNameEinSsa',
+                      ),
+                      DropdownMenuItem<String>(
+                        child: Text('Endereço'),
+                        value: 'clientsFilterAddress',
+                      ),
+                    ],
+                    onChanged: (String value) {
+                      setState(
+                        () {
+                          clientsFilter = value;
+                        },
+                      );
+                    },
+                    //hint: Text('filtrar'),
+                    value: clientsFilter,
+                  ),
+                  _submitButton(),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildClientsResult() {
@@ -52,7 +128,7 @@ class _ClientSearchPageState
 
         if (controller.clients.value == null) {
           return Center(
-              child: CircularProgressIndicator(
+              child: LinearProgressIndicator(
             backgroundColor: Colors.green,
           ));
         }
@@ -67,11 +143,44 @@ class _ClientSearchPageState
           itemCount: controller.clients.value.length,
           itemBuilder: (context, index) {
             var model = list[index];
-
-            print(model.name);
-
+            //print(model.name);
             return _getListTile(model);
           },
+        );
+      },
+    );
+  }
+
+  Widget _submitButton() {
+    return Observer(
+      name: 'submitButtonObserver',
+      builder: (_) {
+        return RaisedButton(
+          elevation: 5.0,
+          onPressed: controller.isFormValid
+              ? () async {
+                  print("Client Saved !");
+                  //var result = await controller.save();
+                  ////print(result);
+                  //if (result) {
+                  //  Modular.to.pushReplacementNamed('/clients');
+                  //} else {
+                  //  //_flushBar();
+                  //}
+                }
+              : null,
+          padding: EdgeInsets.all(10.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          //color: Colors.blue,
+          child: Text(
+            AppTranslate(context).text('fields.submit'),
+            // ignore: lines_longer_than_80_chars
+            //style: controller.appController.isDark
+            //    ? kDarkButtonTextStyle20
+            //    : kLightButtonTextStyle20,
+          ),
         );
       },
     );
@@ -125,70 +234,11 @@ class _ClientSearchPageState
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(kDefaultPaddin * 0.2),
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Align(
-              alignment: Alignment.topLeft,
-              child: DropdownButton<String>(
-                items: [
-                  DropdownMenuItem<String>(
-                    child: Text('Nome/CPF/CNPJ'),
-                    value: 'one',
-                  ),
-                  DropdownMenuItem<String>(
-                    child: Text('Endereço'),
-                    value: 'two',
-                  ),
-                ],
-                onChanged: (String value) {
-                  setState(() {
-                    _clientSearchFilters = value;
-                  });
-                },
-                hint: Text('filtrar'),
-                value: _clientSearchFilters,
-              ),
-            ),
-            TagEditor(
-              length: values.length,
-              focusNode: _focusNode,
-              delimiters: [',', ' '],
-              hasAddButton: false,
-              resetTextOnSubmitted: true,
-              textStyle: TextStyle(
-                color: Colors.grey,
-              ),
-              onSubmitted: (outstandingValue) {
-                setState(() {
-                  values.add(outstandingValue);
-                });
-              },
-              inputDecoration: InputDecoration(
-                //border: OutlineInputBorder(),
-                //enabledBorder: OutlineInputBorder(),
-                //focusedBorder: OutlineInputBorder(),
-                hintText: 'Hint Text...',
-              ),
-              onTagChanged: (newValue) {
-                setState(() {
-                  values.add(newValue);
-                });
-              },
-              tagBuilder: (context, index) => _Chip(
-                index: index,
-                label: values[index],
-                onDeleted: onDelete,
-              ),
-            ),
-            FlatButton(
-              onPressed: () {},
-              child: Text(
-                "Enviar",
-              ),
-            ),
-            Divider(),
+            _buildClientsSearch(),
             _buildClientsResult(),
           ],
         ),
@@ -222,14 +272,14 @@ CircleAvatar _getLeadingWidget() {
 Text _getTitleWidget(String modelName) {
   return Text(
     modelName,
-    style: TextStyle(fontWeight: FontWeight.bold),
+    //style: TextStyle(fontWeight: FontWeight.bold),
   );
 }
 
 Text _getSubtitleWidget(String modelEinSSa) {
   return Text(
     modelEinSSa,
-    style: TextStyle(fontWeight: FontWeight.bold),
+    //style: TextStyle(fontWeight: FontWeight.bold),
   );
 }
 

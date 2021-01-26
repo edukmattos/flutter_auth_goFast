@@ -31,7 +31,9 @@
         "submit" : "REGISTER"
     },
     "clients": {
-        "title": "Clients"
+        "title": "Clients",
+        "dashboard": "Dashboard",
+        "searchSubmit": "Search"
     },
     "fields": {
         "required": "Required",

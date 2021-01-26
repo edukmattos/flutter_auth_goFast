@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../core/config/app_config.dart';
+import '../../../core/config/constants.dart';
+import '../../../core/features/localization/app_translate.dart';
+import '../../../widgets/drawer/app_drawer_widget.dart';
 import 'client_dashboard_controller.dart';
 
 class ClientDashboardPage extends StatefulWidget {
@@ -17,10 +23,28 @@ class _ClientDashboardPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    var appBar = AppBar(
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            AppTranslate(context).text('clients.title'),
+            style: kPageTitleTextStyle20,
+          ),
+          Visibility(
+            visible: true,
+            child: Text(
+              AppTranslate(context).text('clients.dashboard'),
+              style: kPageSubTitleTextStyle14,
+            ),
+          )
+        ],
       ),
+    );
+
+    return Scaffold(
+      appBar: appBar,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
@@ -46,9 +70,38 @@ class _ClientDashboardPageState
           ],
         ),
       ),
-      body: Column(
-        children: <Widget>[],
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: controller.appController.isDark
+                    ? kBoxDecorationStyleBackgroundDark
+                    : kBoxDecorationStyleBackgroundLight,
+              ),
+              Container(
+                height: double.infinity,
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: kDefaultPaddin,
+                    vertical: kDefaultPaddin,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
+      drawer: AppDrawerWidget(),
     );
   }
 }

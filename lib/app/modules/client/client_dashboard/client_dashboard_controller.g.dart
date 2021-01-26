@@ -7,7 +7,7 @@ part of 'client_dashboard_controller.dart';
 // **************************************************************************
 
 final $ClientDashboardController = BindInject(
-  (i) => ClientDashboardController(),
+  (i) => ClientDashboardController(i<AppController>()),
   singleton: true,
   lazy: true,
 );

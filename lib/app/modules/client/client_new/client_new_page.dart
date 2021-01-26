@@ -1,5 +1,6 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -347,41 +348,59 @@ class _ClientNewPageState
     return Scaffold(
       key: _scaffoldKey,
       appBar: appBar,
+      //floatingActionButton: _buildSpeedDial(),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      //bottomNavigationBar: _buildBottomBar(),
       body: Form(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(18),
-              height: MediaQuery.of(context).size.height,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _buildEinSsaTF(),
-                  SizedBox(
-                    height: 10,
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  decoration: controller.appController.isDark
+                      ? kBoxDecorationStyleBackgroundDark
+                      : kBoxDecorationStyleBackgroundLight,
+                ),
+                Container(
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: kDefaultPaddin,
+                      vertical: kDefaultPaddin,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          height: kDefaultPaddin * 0.5,
+                        ),
+                        _buildEinSsaTF(),
+                        SizedBox(
+                          height: kDefaultPaddin * 0.5,
+                        ),
+                        _buildNameTF(),
+                        SizedBox(
+                          height: kDefaultPaddin * 0.5,
+                        ),
+                        _buildEmailTF(),
+                        SizedBox(
+                          height: kDefaultPaddin * 0.5,
+                        ),
+                        _submitButton(),
+                      ],
+                    ),
                   ),
-                  _buildNameTF(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  _buildEmailTF(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Observer(
-                      name: 'submitButtonObserver',
-                      builder: (_) {
-                        return _submitButton();
-                      }),
-                ],
-              ),
+                )
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 }
-
-class _buildPasswordTF {}
