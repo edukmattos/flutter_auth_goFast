@@ -3,6 +3,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:material_tag_editor/tag_editor.dart';
+import 'package:select_form_field/select_form_field.dart';
+import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../core/config/app_config.dart';
 import '../../../core/config/constants.dart';
@@ -30,6 +32,23 @@ class _ClientSearchPageState
   List<String> clientsTags = [];
   final FocusNode _focusNode = FocusNode();
 
+  final List<Map<String, dynamic>> _clientFiltersOptions = [
+    {
+      'value': 'boxValue',
+      'label': 'Nome/CPF/CNPJ',
+      'enable': true,
+      //'icon': Icon(Icons.stop),
+      //'textStyle': TextStyle(color: Colors.red),
+    },
+    {
+      'value': 'circleValue',
+      'label': 'Endereço',
+      'enable': true,
+      //'icon': Icon(Icons.fiber_manual_record),
+      //'textStyle': TextStyle(color: Colors.red),
+    },
+  ];
+
   String clientsFilter = "clientsFilterNameEinSsa";
 
   void onDelete(index) {
@@ -45,6 +64,32 @@ class _ClientSearchPageState
           padding: const EdgeInsets.all(kDefaultPaddin * 0.5),
           child: Column(
             children: [
+              //TextFieldTags(
+              //    tagsStyler: TagsStyler(
+              //      tagTextStyle: TextStyle(
+              //          fontWeight: FontWeight.bold, color: Colors.white),
+              //      tagDecoration: BoxDecoration(
+              //        color: const Color.fromARGB(255, 171, 81, 81),
+              //        borderRadius: BorderRadius.circular(8.0),
+              //      ),
+              //      tagCancelIcon: Icon(Icons.cancel,
+              //          size: 16.0, color: Color.fromARGB(255, 235, 214, 214)),
+              //      tagPadding: const EdgeInsets.all(10.0),
+              //    ),
+              //    textFieldStyler: TextFieldStyler(),
+              //    onTag: controller.changeClientsFilter,
+              //    //onTag: (tag) {},
+              //    onDelete: (tag) {}),
+              SelectFormField(
+                //controller: controller.clientsFilter,
+                type: SelectFormFieldType.dropdown,
+                initialValue: 'circle',
+                //icon: Icon(Icons.format_shapes),
+                labelText: 'Filtrar por',
+                items: _clientFiltersOptions,
+                onChanged: controller.changeClientsFilter,
+                //onSaved: (val) => print(val),
+              ),
               TagEditor(
                 autofocus: true,
                 length: clientsTags.length,
@@ -80,34 +125,35 @@ class _ClientSearchPageState
                   onDeleted: onDelete,
                 ),
               ),
-              ButtonBar(
-                alignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  DropdownButton<String>(
-                    isDense: false,
-                    items: [
-                      DropdownMenuItem<String>(
-                        child: Text('Nome/CPF/CNPJ'),
-                        value: 'clientsFilterNameEinSsa',
-                      ),
-                      DropdownMenuItem<String>(
-                        child: Text('Endereço'),
-                        value: 'clientsFilterAddress',
-                      ),
-                    ],
-                    onChanged: (String value) {
-                      setState(
-                        () {
-                          clientsFilter = value;
-                        },
-                      );
-                    },
-                    //hint: Text('filtrar'),
-                    value: clientsFilter,
-                  ),
-                  _submitButton(),
-                ],
-              ),
+              //ButtonBar(
+              //  alignment: MainAxisAlignment.spaceBetween,
+              //  children: [
+              //    DropdownButton<String>(
+              //      isDense: false,
+              //      items: [
+              //        DropdownMenuItem<String>(
+              //          child: Text('Nome/CPF/CNPJ'),
+              //          value: 'clientsFilterNameEinSsa',
+              //        ),
+              //        DropdownMenuItem<String>(
+              //          child: Text('Endereço'),
+              //          value: 'clientsFilterAddress',
+              //        ),
+              //      ],
+              //      onChanged: (String value) {
+              //        setState(
+              //          () {
+              //            clientsFilter = value;
+              //          },
+              //        );
+              //      },
+              //      //hint: Text('filtrar'),
+              //      value: clientsFilter,
+              //    ),
+              //    _submitButton(),
+              //  ],
+              //),
+              _submitButton(),
             ],
           ),
         ),

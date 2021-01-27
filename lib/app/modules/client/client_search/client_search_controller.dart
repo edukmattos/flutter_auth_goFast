@@ -37,8 +37,8 @@ abstract class _ClientSearchControllerBase with Store {
     print(validateClientsFilter());
     //return true;
     // ignore: lines_longer_than_80_chars
-    //return validateClientsFilter() == null;
-    return validateClientsFilter() == null && validateClientsTags() == null;
+    return validateClientsFilter() == null;
+    //return validateClientsFilter() == null && validateClientsTags() == null;
   }
 
   String validateClientsFilter() {
