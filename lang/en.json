@@ -40,7 +40,10 @@
         "einSsa": "EIN/SSA",
         "name": "Name",
         "email": "Email",
+        "tags": "Tags",
+        "filter": "Filter",
         "submit": "SEND"
+
     },
     "operations": {
         "new": "New",

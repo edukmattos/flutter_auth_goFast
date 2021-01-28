@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:material_tag_editor/tag_editor.dart';
@@ -28,9 +29,9 @@ class ClientSearchPage extends StatefulWidget {
 class _ClientSearchPageState
     extends ModularState<ClientSearchPage, ClientSearchController> {
   //use 'controller' variable to access controller
+  final _formKey = GlobalKey<FormState>();
 
   List<String> clientsTags = [];
-  final FocusNode _focusNode = FocusNode();
 
   final List<Map<String, dynamic>> _clientFiltersOptions = [
     {
@@ -49,115 +50,163 @@ class _ClientSearchPageState
     },
   ];
 
-  String clientsFilter = "clientsFilterNameEinSsa";
+  Widget _buildClientsFiltersOptions() {
+    return Observer(
+      name: 'observerlientsFiltersOptions',
+      builder: (_) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              alignment: Alignment.centerLeft,
+              decoration: controller.appController.isDark
+                  ? kBoxDecorationStyleDark
+                  : kBoxDecorationStyleLight,
+              height: kDefaultPaddin * 2.5,
+              child: Padding(
+                padding: EdgeInsets.only(top: kDefaultPaddin * 0),
+                child: SelectFormField(
+                  //controller: controller.clientsFiltersOptions,
+                  type: SelectFormFieldType.dropdown,
+                  initialValue: 'circle',
+                  //icon: Icon(Icons.format_shapes),
+                  labelText: AppTranslate(context).text('fields.filter'),
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    //border: InputBorder.none,
+                    labelText: AppTranslate(context).text('fields.filter'),
+                    labelStyle: kLabelStyle,
+                    contentPadding: EdgeInsets.only(
+                      top: kDefaultPaddin * 0.0,
+                    ),
 
-  void onDelete(index) {
-    setState(() {
-      clientsTags.removeAt(index);
-    });
+                    prefixIcon: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: kDefaultPaddin * 0.0,
+                        vertical: kDefaultPaddin * 0.0,
+                      ),
+                      child: Icon(
+                        Icons.filter,
+                        //color: Colors.white,
+                      ),
+                    ),
+                    suffixIcon: Padding(
+                      padding: EdgeInsetsDirectional.only(
+                        top: kDefaultPaddin * 1.00,
+                        end: kDefaultPaddin * 0.25,
+                      ),
+                      child: controller.validateClientsFilterTag() == null
+                          ? null
+                          : Text(
+                              controller.validateClientsFilterTag(),
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontFamily: 'OpenSans',
+                                  fontSize: 12),
+                            ),
+                    ),
+                  ),
+                  items: _clientFiltersOptions,
+                  //onChanged: controller.changeClientsFilter,
+                  //onSaved: (val) => print(val),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
-  Widget _buildClientsSearch() {
-    return Form(
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(kDefaultPaddin * 0.5),
-          child: Column(
-            children: [
-              //TextFieldTags(
-              //    tagsStyler: TagsStyler(
-              //      tagTextStyle: TextStyle(
-              //          fontWeight: FontWeight.bold, color: Colors.white),
-              //      tagDecoration: BoxDecoration(
-              //        color: const Color.fromARGB(255, 171, 81, 81),
-              //        borderRadius: BorderRadius.circular(8.0),
-              //      ),
-              //      tagCancelIcon: Icon(Icons.cancel,
-              //          size: 16.0, color: Color.fromARGB(255, 235, 214, 214)),
-              //      tagPadding: const EdgeInsets.all(10.0),
-              //    ),
-              //    textFieldStyler: TextFieldStyler(),
-              //    onTag: controller.changeClientsFilter,
-              //    //onTag: (tag) {},
-              //    onDelete: (tag) {}),
-              SelectFormField(
-                //controller: controller.clientsFilter,
-                type: SelectFormFieldType.dropdown,
-                initialValue: 'circle',
-                //icon: Icon(Icons.format_shapes),
-                labelText: 'Filtrar por',
-                items: _clientFiltersOptions,
-                onChanged: controller.changeClientsFilter,
-                //onSaved: (val) => print(val),
-              ),
-              TagEditor(
-                autofocus: true,
-                length: clientsTags.length,
-                focusNode: _focusNode,
-                delimiters: [',', ';', '-', ' '],
-                hasAddButton: false,
-                resetTextOnSubmitted: true,
-                textStyle: TextStyle(
-                    //color: Colors.grey,
+  Widget _buildClientsFiltersTags() {
+    return Observer(
+      name: 'observerlientsFiltersTags',
+      builder: (_) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              alignment: Alignment.centerLeft,
+              decoration: controller.appController.isDark
+                  ? kBoxDecorationStyleDark
+                  : kBoxDecorationStyleLight,
+              height: kDefaultPaddin * 2.5,
+              child: Padding(
+                padding: EdgeInsets.only(top: kDefaultPaddin * 0),
+                child: TextFormField(
+                  onChanged: controller.changeClientsFilterTags,
+                  autofocus: false,
+                  obscureText: false,
+                  keyboardType: TextInputType.text,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                onSubmitted: (outstandingValue) {
-                  setState(
-                    () {
-                      clientsTags.add(outstandingValue);
-                    },
-                  );
-                },
-                inputDecoration: InputDecoration(
-                  //border: OutlineInputBorder(),
-                  //enabledBorder: OutlineInputBorder(),
-                  //focusedBorder: OutlineInputBorder(),
-                  hintText: 'Tags ...',
-                ),
-                //onTagChanged: controller.changeClientsTags,
-                onTagChanged: (newValue) {
-                  setState(() {
-                    clientsTags.add(newValue);
-                  });
-                },
-                tagBuilder: (context, index) => _Chip(
-                  index: index,
-                  label: clientsTags[index],
-                  onDeleted: onDelete,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    //border: InputBorder.none,
+                    labelText: AppTranslate(context).text('fields.tags'),
+                    labelStyle: kLabelStyle,
+                    contentPadding: EdgeInsets.only(
+                      top: kDefaultPaddin * 0.0,
+                    ),
+
+                    prefixIcon: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: kDefaultPaddin * 0.0,
+                        vertical: kDefaultPaddin * 0.0,
+                      ),
+                      child: Icon(
+                        Icons.email,
+                        //color: Colors.white,
+                      ),
+                    ),
+                    suffixIcon: Padding(
+                      padding: EdgeInsetsDirectional.only(
+                        top: kDefaultPaddin * 1.00,
+                        end: kDefaultPaddin * 0.25,
+                      ),
+                      child: controller.validateClientsFilterTag() == null
+                          ? null
+                          : Text(
+                              controller.validateClientsFilterTag(),
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontFamily: 'OpenSans',
+                                  fontSize: 12),
+                            ),
+                    ),
+                  ),
                 ),
               ),
-              //ButtonBar(
-              //  alignment: MainAxisAlignment.spaceBetween,
-              //  children: [
-              //    DropdownButton<String>(
-              //      isDense: false,
-              //      items: [
-              //        DropdownMenuItem<String>(
-              //          child: Text('Nome/CPF/CNPJ'),
-              //          value: 'clientsFilterNameEinSsa',
-              //        ),
-              //        DropdownMenuItem<String>(
-              //          child: Text('Endereço'),
-              //          value: 'clientsFilterAddress',
-              //        ),
-              //      ],
-              //      onChanged: (String value) {
-              //        setState(
-              //          () {
-              //            clientsFilter = value;
-              //          },
-              //        );
-              //      },
-              //      //hint: Text('filtrar'),
-              //      value: clientsFilter,
-              //    ),
-              //    _submitButton(),
-              //  ],
-              //),
-              _submitButton(),
-            ],
-          ),
-        ),
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -279,14 +328,55 @@ class _ClientSearchPageState
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(kDefaultPaddin * 0.2),
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _buildClientsSearch(),
-            _buildClientsResult(),
-          ],
+      body: Form(
+        key: _formKey,
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  decoration: controller.appController.isDark
+                      ? kBoxDecorationStyleBackgroundDark
+                      : kBoxDecorationStyleBackgroundLight,
+                ),
+                Container(
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: kDefaultPaddin,
+                      vertical: kDefaultPaddin,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          height: kDefaultPaddin * 0.5,
+                        ),
+                        _buildClientsFiltersOptions(),
+                        SizedBox(
+                          height: kDefaultPaddin * 0.5,
+                        ),
+                        _buildClientsFiltersTags(),
+                        SizedBox(
+                          height: kDefaultPaddin * 0.5,
+                        ),
+                        _submitButton(),
+                        SizedBox(
+                          height: kDefaultPaddin * 0.5,
+                        ),
+                        _buildClientsResult()
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -327,31 +417,4 @@ Text _getSubtitleWidget(String modelEinSSa) {
     modelEinSSa,
     //style: TextStyle(fontWeight: FontWeight.bold),
   );
-}
-
-class _Chip extends StatelessWidget {
-  const _Chip({
-    @required this.label,
-    @required this.onDeleted,
-    @required this.index,
-  });
-
-  final String label;
-  final ValueChanged<int> onDeleted;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Chip(
-      labelPadding: const EdgeInsets.only(left: 8.0),
-      label: Text(label),
-      deleteIcon: Icon(
-        Icons.close,
-        size: 18,
-      ),
-      onDeleted: () {
-        onDeleted(index);
-      },
-    );
-  }
 }

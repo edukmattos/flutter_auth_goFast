@@ -39,6 +39,8 @@
         "einSsa": "CPF/CNPJ",
         "name": "Nome",
         "email": "E-mail",
+        "tags": "Tags",
+        "filter": "Filtro",
         "submit": "ENVIAR"
     },
     "operations": {

@@ -1,3 +1,4 @@
+import 'package:flutter_auth/app/app_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
@@ -13,7 +14,8 @@ class ClientSearchModule extends ChildModule {
         // ignore: lines_longer_than_80_chars
         Bind<IClientSearchRepository>(
             (i) => ClientSearchRepository(i.get<HasuraConnect>())),
-        Bind((i) => ClientSearchController(i.get<IClientSearchRepository>())),
+        Bind((i) => ClientSearchController(
+            i.get<IClientSearchRepository>(), i.get<AppController>())),
         Bind((i) => HasuraConnect(configAppHasuraUrl)),
       ];
 

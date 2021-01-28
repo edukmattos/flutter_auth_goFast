@@ -7,7 +7,8 @@ part of 'client_search_controller.dart';
 // **************************************************************************
 
 final $ClientSearchController = BindInject(
-  (i) => ClientSearchController(i<ClientSearchRepository>()),
+  (i) =>
+      ClientSearchController(i<ClientSearchRepository>(), i<AppController>()),
   singleton: true,
   lazy: true,
 );
@@ -27,35 +28,36 @@ mixin _$ClientSearchController on _ClientSearchControllerBase, Store {
               name: '_ClientSearchControllerBase.isFormValid'))
           .value;
 
-  final _$clientsFilterAtom =
-      Atom(name: '_ClientSearchControllerBase.clientsFilter');
+  final _$clientsFiltersOptionsAtom =
+      Atom(name: '_ClientSearchControllerBase.clientsFiltersOptions');
 
   @override
-  String get clientsFilter {
-    _$clientsFilterAtom.reportRead();
-    return super.clientsFilter;
+  ObservableMap<String, dynamic> get clientsFiltersOptions {
+    _$clientsFiltersOptionsAtom.reportRead();
+    return super.clientsFiltersOptions;
   }
 
   @override
-  set clientsFilter(String value) {
-    _$clientsFilterAtom.reportWrite(value, super.clientsFilter, () {
-      super.clientsFilter = value;
+  set clientsFiltersOptions(ObservableMap<String, dynamic> value) {
+    _$clientsFiltersOptionsAtom.reportWrite(value, super.clientsFiltersOptions,
+        () {
+      super.clientsFiltersOptions = value;
     });
   }
 
-  final _$clientsTagsAtom =
-      Atom(name: '_ClientSearchControllerBase.clientsTags');
+  final _$clientsFilterTagsAtom =
+      Atom(name: '_ClientSearchControllerBase.clientsFilterTags');
 
   @override
-  List<String> get clientsTags {
-    _$clientsTagsAtom.reportRead();
-    return super.clientsTags;
+  String get clientsFilterTags {
+    _$clientsFilterTagsAtom.reportRead();
+    return super.clientsFilterTags;
   }
 
   @override
-  set clientsTags(List<String> value) {
-    _$clientsTagsAtom.reportWrite(value, super.clientsTags, () {
-      super.clientsTags = value;
+  set clientsFilterTags(String value) {
+    _$clientsFilterTagsAtom.reportWrite(value, super.clientsFilterTags, () {
+      super.clientsFilterTags = value;
     });
   }
 
@@ -86,22 +88,24 @@ mixin _$ClientSearchController on _ClientSearchControllerBase, Store {
       ActionController(name: '_ClientSearchControllerBase');
 
   @override
-  dynamic changeClientsFilter(String value) {
-    final _$actionInfo = _$_ClientSearchControllerBaseActionController
-        .startAction(name: '_ClientSearchControllerBase.changeClientsFilter');
+  dynamic changeClientsFiltersOptions(Map<String, dynamic> value) {
+    final _$actionInfo =
+        _$_ClientSearchControllerBaseActionController.startAction(
+            name: '_ClientSearchControllerBase.changeClientsFiltersOptions');
     try {
-      return super.changeClientsFilter(value);
+      return super.changeClientsFiltersOptions(value);
     } finally {
       _$_ClientSearchControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic changeClientsTags(String value) {
-    final _$actionInfo = _$_ClientSearchControllerBaseActionController
-        .startAction(name: '_ClientSearchControllerBase.changeClientsTags');
+  dynamic changeClientsFilterTags(String value) {
+    final _$actionInfo =
+        _$_ClientSearchControllerBaseActionController.startAction(
+            name: '_ClientSearchControllerBase.changeClientsFilterTags');
     try {
-      return super.changeClientsTags(value);
+      return super.changeClientsFilterTags(value);
     } finally {
       _$_ClientSearchControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -110,8 +114,8 @@ mixin _$ClientSearchController on _ClientSearchControllerBase, Store {
   @override
   String toString() {
     return '''
-clientsFilter: ${clientsFilter},
-clientsTags: ${clientsTags},
+clientsFiltersOptions: ${clientsFiltersOptions},
+clientsFilterTags: ${clientsFilterTags},
 clients: ${clients},
 isFormValid: ${isFormValid}
     ''';

@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../app_controller.dart';
 import '../../../models/client_model.dart';
 import 'repositories/client_search_repository.dart';
 
@@ -13,41 +14,47 @@ class ClientSearchController = _ClientSearchControllerBase
 
 abstract class _ClientSearchControllerBase with Store {
   final ClientSearchRepository _clientSearchRepository;
+  final AppController appController;
 
-  _ClientSearchControllerBase(this._clientSearchRepository) {
+  _ClientSearchControllerBase(
+      this._clientSearchRepository, this.appController) {
     searchClients();
   }
 
   @observable
-  String clientsFilter;
+  ObservableMap<String, dynamic> clientsFiltersOptions = ObservableMap();
 
   @action
+  // ignore: lines_longer_than_80_chars
   // ignore: type_annotate_public_apis
-  changeClientsFilter(String value) => clientsFilter = value;
+  changeClientsFiltersOptions(Map<String, dynamic> value) =>
+      clientsFiltersOptions = value;
 
   @observable
-  List<String> clientsTags;
+  String clientsFilterTags;
 
   @action
   // ignore: type_annotate_public_apis
-  changeClientsTags(String value) => clientsTags = value as List<String>;
+  changeClientsFilterTags(String value) => clientsFilterTags = value;
 
   @computed
   bool get isFormValid {
-    print(validateClientsFilter());
+    //print(validateClientsFilter());
     //return true;
     // ignore: lines_longer_than_80_chars
-    return validateClientsFilter() == null;
-    //return validateClientsFilter() == null && validateClientsTags() == null;
+    //return validateClientsFiltersOptions() == null;
+    return validateClientsFiltersOptions() == null &&
+        validateClientsFilterTag() == null;
   }
 
-  String validateClientsFilter() {
-    if (validatorRequired(clientsFilter)) return "Obrigatorio.";
+  String validateClientsFiltersOptions() {
+    print(clientsFiltersOptions);
+    if (validatorRequired(clientsFiltersOptions)) return "Obrigatorio.";
     return null;
   }
 
-  String validateClientsTags() {
-    if (validatorRequired(clientsTags)) return "Obrigatorio.";
+  String validateClientsFilterTag() {
+    if (validatorRequired(clientsFilterTags)) return "Obrigatorio.";
     return null;
   }
 
