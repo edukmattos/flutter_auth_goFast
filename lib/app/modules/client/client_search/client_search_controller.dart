@@ -31,11 +31,22 @@ abstract class _ClientSearchControllerBase with Store {
       clientsFiltersOptions = value;
 
   @observable
+  String clientsFiltersOption;
+
+  @action
+  // ignore: lines_longer_than_80_chars
+  // ignore: type_annotate_public_apis
+  changeClientsFiltersOption(String value) => clientsFiltersOption = value;
+
+  @observable
   String clientsFilterTags;
 
   @action
   // ignore: type_annotate_public_apis
   changeClientsFilterTags(String value) => clientsFilterTags = value;
+
+  @observable
+  ObservableStream<List<ClientModel>> clients;
 
   @computed
   bool get isFormValid {
@@ -43,17 +54,18 @@ abstract class _ClientSearchControllerBase with Store {
     //return true;
     // ignore: lines_longer_than_80_chars
     //return validateClientsFiltersOptions() == null;
-    return validateClientsFiltersOptions() == null &&
+    return validateClientsFiltersOption() == null &&
         validateClientsFilterTag() == null;
   }
 
-  String validateClientsFiltersOptions() {
-    print(clientsFiltersOptions);
-    if (validatorRequired(clientsFiltersOptions)) return "Obrigatorio.";
+  String validateClientsFiltersOption() {
+    print(clientsFiltersOption);
+    if (validatorRequired(clientsFiltersOption)) return "Obrigatorio.";
     return null;
   }
 
   String validateClientsFilterTag() {
+    print(clientsFilterTags);
     if (validatorRequired(clientsFilterTags)) return "Obrigatorio.";
     return null;
   }
@@ -77,7 +89,4 @@ abstract class _ClientSearchControllerBase with Store {
         ObservableStream(
             await _clientSearchRepository.searchClientEinSsaName());
   }
-
-  @observable
-  ObservableStream<List<ClientModel>> clients;
 }

@@ -45,6 +45,23 @@ mixin _$ClientSearchController on _ClientSearchControllerBase, Store {
     });
   }
 
+  final _$clientsFiltersOptionAtom =
+      Atom(name: '_ClientSearchControllerBase.clientsFiltersOption');
+
+  @override
+  String get clientsFiltersOption {
+    _$clientsFiltersOptionAtom.reportRead();
+    return super.clientsFiltersOption;
+  }
+
+  @override
+  set clientsFiltersOption(String value) {
+    _$clientsFiltersOptionAtom.reportWrite(value, super.clientsFiltersOption,
+        () {
+      super.clientsFiltersOption = value;
+    });
+  }
+
   final _$clientsFilterTagsAtom =
       Atom(name: '_ClientSearchControllerBase.clientsFilterTags');
 
@@ -109,6 +126,18 @@ mixin _$ClientSearchController on _ClientSearchControllerBase, Store {
   }
 
   @override
+  dynamic changeClientsFiltersOption(String value) {
+    final _$actionInfo =
+        _$_ClientSearchControllerBaseActionController.startAction(
+            name: '_ClientSearchControllerBase.changeClientsFiltersOption');
+    try {
+      return super.changeClientsFiltersOption(value);
+    } finally {
+      _$_ClientSearchControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic changeClientsFilterTags(String value) {
     final _$actionInfo =
         _$_ClientSearchControllerBaseActionController.startAction(
@@ -124,6 +153,7 @@ mixin _$ClientSearchController on _ClientSearchControllerBase, Store {
   String toString() {
     return '''
 clientsFiltersOptions: ${clientsFiltersOptions},
+clientsFiltersOption: ${clientsFiltersOption},
 clientsFilterTags: ${clientsFilterTags},
 clients: ${clients},
 isFormValid: ${isFormValid}

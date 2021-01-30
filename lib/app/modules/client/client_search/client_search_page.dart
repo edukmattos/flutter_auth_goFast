@@ -75,7 +75,6 @@ class _ClientSearchPageState
                 padding: EdgeInsets.only(top: kDefaultPaddin * 0),
                 child: SelectFormField(
                   // ignore: lines_longer_than_80_chars
-                  //onChanged: controller.changeClientsFiltersOptions(),
                   type: SelectFormFieldType.dropdown,
                   initialValue: '',
                   //enableSearch: true,
@@ -111,7 +110,7 @@ class _ClientSearchPageState
                       ),
                       child: Icon(
                         Icons.filter,
-                        //color: Colors.white,
+                        color: Colors.white,
                       ),
                     ),
                     suffixIcon: Padding(
@@ -119,10 +118,10 @@ class _ClientSearchPageState
                         top: kDefaultPaddin * 1.00,
                         end: kDefaultPaddin * 0.25,
                       ),
-                      child: controller.validateClientsFiltersOptions() == null
+                      child: controller.validateClientsFiltersOption() == null
                           ? null
                           : Text(
-                              controller.validateClientsFiltersOptions(),
+                              controller.validateClientsFiltersOption(),
                               style: TextStyle(
                                   color: Colors.red,
                                   fontFamily: 'OpenSans',
@@ -131,6 +130,8 @@ class _ClientSearchPageState
                     ),
                   ),
                   items: _clientFiltersOptions,
+                  // ignore: lines_longer_than_80_chars
+                  onChanged: controller.changeClientsFiltersOption(),
                   //onSaved: (val) => print(val),
                 ),
               ),
