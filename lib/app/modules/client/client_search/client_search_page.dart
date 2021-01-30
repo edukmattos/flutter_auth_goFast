@@ -36,21 +36,21 @@ class _ClientSearchPageState
 
   final List<Map<String, dynamic>> _clientFiltersOptions = [
     {
-      'value': 'boxValue',
+      'value': '01',
       'label': 'Nome',
       'enable': true,
       //'icon': Icon(Icons.stop),
       //'textStyle': TextStyle(color: Colors.red),
     },
     {
-      'value': 'boxValue',
+      'value': '02',
       'label': 'CPF/CNPJ',
       'enable': true,
       //'icon': Icon(Icons.stop),
       //'textStyle': TextStyle(color: Colors.red),
     },
     {
-      'value': 'circleValue',
+      'value': '03',
       'label': 'Endereço',
       'enable': true,
       //'icon': Icon(Icons.fiber_manual_record),
@@ -75,11 +75,11 @@ class _ClientSearchPageState
                 padding: EdgeInsets.only(top: kDefaultPaddin * 0),
                 child: SelectFormField(
                   // ignore: lines_longer_than_80_chars
-                  onChanged: controller.changeClientsFiltersOptions(),
-                  type: SelectFormFieldType.dialog,
-                  initialValue: 'circle',
+                  //onChanged: controller.changeClientsFiltersOptions(),
+                  type: SelectFormFieldType.dropdown,
+                  initialValue: '',
                   //enableSearch: true,
-                  //icon: Icon(Icons.format_shapes),
+                  icon: Icon(Icons.format_shapes),
                   labelText: AppTranslate(context).text('fields.filter'),
                   style: TextStyle(
                     color: Colors.white,

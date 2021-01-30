@@ -33,7 +33,10 @@
     "clients": {
         "title": "Clients",
         "dashboard": "Dashboard",
-        "searchSubmit": "Search"
+        "searchSubmit": "Search",
+        "searchFilterOption_01": "Name",
+        "searchFilterOption_02": "EIN/SSA",
+        "searchFilterOption_03": "Address"
     },
     "fields": {
         "required": "Required",

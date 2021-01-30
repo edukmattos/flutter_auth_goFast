@@ -47,7 +47,10 @@
         "new": "Inclusão",
         "edit": "Alteração",
         "show": "Consulta",
-        "search": "Pesquisa"
+        "search": "Pesquisa",
+        "searchFilterOption_01": "Nome",
+        "searchFilterOption_02": "CPF/CNPJ",
+        "searchFilterOption_03": "Endereço"
     },
     "dashboard": {
         "title": "Painel Controle",
