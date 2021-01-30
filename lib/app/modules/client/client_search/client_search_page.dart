@@ -30,13 +30,21 @@ class _ClientSearchPageState
     extends ModularState<ClientSearchPage, ClientSearchController> {
   //use 'controller' variable to access controller
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   List<String> clientsTags = [];
 
   final List<Map<String, dynamic>> _clientFiltersOptions = [
     {
       'value': 'boxValue',
-      'label': 'Nome/CPF/CNPJ',
+      'label': 'Nome',
+      'enable': true,
+      //'icon': Icon(Icons.stop),
+      //'textStyle': TextStyle(color: Colors.red),
+    },
+    {
+      'value': 'boxValue',
+      'label': 'CPF/CNPJ',
       'enable': true,
       //'icon': Icon(Icons.stop),
       //'textStyle': TextStyle(color: Colors.red),
@@ -66,9 +74,11 @@ class _ClientSearchPageState
               child: Padding(
                 padding: EdgeInsets.only(top: kDefaultPaddin * 0),
                 child: SelectFormField(
-                  //controller: controller.clientsFiltersOptions,
-                  type: SelectFormFieldType.dropdown,
+                  // ignore: lines_longer_than_80_chars
+                  onChanged: controller.changeClientsFiltersOptions(),
+                  type: SelectFormFieldType.dialog,
                   initialValue: 'circle',
+                  //enableSearch: true,
                   //icon: Icon(Icons.format_shapes),
                   labelText: AppTranslate(context).text('fields.filter'),
                   style: TextStyle(
@@ -109,10 +119,10 @@ class _ClientSearchPageState
                         top: kDefaultPaddin * 1.00,
                         end: kDefaultPaddin * 0.25,
                       ),
-                      child: controller.validateClientsFilterTag() == null
+                      child: controller.validateClientsFiltersOptions() == null
                           ? null
                           : Text(
-                              controller.validateClientsFilterTag(),
+                              controller.validateClientsFiltersOptions(),
                               style: TextStyle(
                                   color: Colors.red,
                                   fontFamily: 'OpenSans',
@@ -121,7 +131,6 @@ class _ClientSearchPageState
                     ),
                   ),
                   items: _clientFiltersOptions,
-                  //onChanged: controller.changeClientsFilter,
                   //onSaved: (val) => print(val),
                 ),
               ),
@@ -215,6 +224,7 @@ class _ClientSearchPageState
       name: 'clientListObserver',
       builder: (context) {
         if (controller.clients.hasError) {
+          print(controller.clients.value);
           print(controller.clients.hasError);
           return Center(
             child: Text('Erro a realizar a pesquisa !'),
@@ -223,13 +233,21 @@ class _ClientSearchPageState
 
         if (controller.clients.value == null) {
           return Center(
-              child: LinearProgressIndicator(
-            backgroundColor: Colors.green,
-          ));
+            child: LinearProgressIndicator(
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+
+        if (controller.clients.value.isEmpty) {
+          return Container(
+            width: 0.0,
+            height: 0.0,
+          );
         }
 
         var list = controller.clients.value;
-        print(list);
+        //print(list);
 
         return ListView.builder(
           scrollDirection: Axis.vertical,
@@ -255,8 +273,8 @@ class _ClientSearchPageState
           onPressed: controller.isFormValid
               ? () async {
                   print("Client Saved !");
-                  //var result = await controller.save();
-                  ////print(result);
+                  var list = await controller.searchClientsFilter();
+                  //print(controller.searchClients());
                   //if (result) {
                   //  Modular.to.pushReplacementNamed('/clients');
                   //} else {
@@ -304,6 +322,7 @@ class _ClientSearchPageState
     );
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: appBar,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -390,8 +409,8 @@ ListTile _getListTile(model) {
     title: _getTitleWidget('${model.name}'),
     subtitle: _getSubtitleWidget('${model.einSsa}'),
     isThreeLine: false,
-    trailing: Icon(Icons.keyboard_arrow_right, size: 40.0),
-    //selected: false,
+    trailing: Icon(Icons.keyboard_arrow_right, size: 30.0),
+    selected: true,
     onLongPress: () {
       print("onLongPress");
     },
@@ -408,13 +427,19 @@ CircleAvatar _getLeadingWidget() {
 Text _getTitleWidget(String modelName) {
   return Text(
     modelName,
-    //style: TextStyle(fontWeight: FontWeight.bold),
+    style: TextStyle(
+      fontWeight: FontWeight.normal,
+      color: Colors.white,
+    ),
   );
 }
 
 Text _getSubtitleWidget(String modelEinSSa) {
   return Text(
     modelEinSSa,
-    //style: TextStyle(fontWeight: FontWeight.bold),
+    style: TextStyle(
+      fontWeight: FontWeight.normal,
+      color: Colors.yellow,
+    ),
   );
 }

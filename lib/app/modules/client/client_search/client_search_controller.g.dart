@@ -76,6 +76,15 @@ mixin _$ClientSearchController on _ClientSearchControllerBase, Store {
     });
   }
 
+  final _$searchClientsFilterAsyncAction =
+      AsyncAction('_ClientSearchControllerBase.searchClientsFilter');
+
+  @override
+  Future<dynamic> searchClientsFilter() {
+    return _$searchClientsFilterAsyncAction
+        .run(() => super.searchClientsFilter());
+  }
+
   final _$searchClientsAsyncAction =
       AsyncAction('_ClientSearchControllerBase.searchClients');
 

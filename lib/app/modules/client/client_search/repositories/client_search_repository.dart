@@ -15,11 +15,11 @@ class ClientSearchRepository implements IClientSearchRepository {
 
   Future<Snapshot<List<ClientModel>>> searchClientEinSsaName() async {
     var query = docClientAll;
-    print("2222");
+    //print("2222");
     //subscription
     var snapshot = await _hasuraConnect.subscription(query);
 
-    print(await snapshot);
+    //print(await snapshot);
 
     return snapshot.map((data) {
       if (data == null) {

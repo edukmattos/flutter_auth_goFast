@@ -18,7 +18,7 @@ abstract class _ClientSearchControllerBase with Store {
 
   _ClientSearchControllerBase(
       this._clientSearchRepository, this.appController) {
-    searchClients();
+    //searchClients();
   }
 
   @observable
@@ -56,6 +56,16 @@ abstract class _ClientSearchControllerBase with Store {
   String validateClientsFilterTag() {
     if (validatorRequired(clientsFilterTags)) return "Obrigatorio.";
     return null;
+  }
+
+  @action
+  // ignore: type_annotate_public_apis
+  Future searchClientsFilter() async {
+    // ignore: lines_longer_than_80_chars
+    return clients =
+        // ignore: lines_longer_than_80_chars
+        ObservableStream(
+            await _clientSearchRepository.searchClientEinSsaName());
   }
 
   @action

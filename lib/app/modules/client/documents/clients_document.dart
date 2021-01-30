@@ -17,22 +17,20 @@ const String docClientAll = '''
   }
 ''';
 
-const docSearchClientsEinSsa = '''
-  query qrySearchClientsEinSsa (\$name: String, \$ein_ssa: String) { 
-    clients(
-      where: {
-        _or: [
-          { name: {_eq: \$name}},
-          { ein_ssa: {_eq: \$ein_ssa}}
-        ]
-        _and: [
-          { deleted_at: {_eq: null}}
-        ]
+const docClientsFilterEinSsa = '''
+  subscription getClients {
+    clients (
+      order_by: {
+        name: asc
       }
-    ) {
+    )
+    {
+      id
       name
       ein_ssa
       email
+      created_at
+      updated_at
       deleted_at
     }
   }
