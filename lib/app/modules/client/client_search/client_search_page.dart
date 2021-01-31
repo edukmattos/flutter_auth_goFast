@@ -3,9 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:material_tag_editor/tag_editor.dart';
 import 'package:select_form_field/select_form_field.dart';
-import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../core/config/app_config.dart';
 import '../../../core/config/constants.dart';
@@ -34,6 +32,13 @@ class _ClientSearchPageState
 
   List<String> clientsTags = [];
 
+  //_saveForm() {
+  //  var form = _formKey.currentState;
+  //  if (form.validate()) {
+  //    form.save();
+  //  }
+  //}
+
   final List<Map<String, dynamic>> _clientFiltersOptions = [
     {
       'value': '01',
@@ -58,7 +63,7 @@ class _ClientSearchPageState
     },
   ];
 
-  Widget _buildClientsFiltersOptions() {
+  Widget _fieldClientsFiltersOptions() {
     return Observer(
       name: 'observerlientsFiltersOptions',
       builder: (_) {
@@ -76,7 +81,7 @@ class _ClientSearchPageState
                 child: SelectFormField(
                   // ignore: lines_longer_than_80_chars
                   type: SelectFormFieldType.dropdown,
-                  initialValue: '',
+                  initialValue: "",
                   //enableSearch: true,
                   icon: Icon(Icons.format_shapes),
                   labelText: AppTranslate(context).text('fields.filter'),
@@ -131,7 +136,8 @@ class _ClientSearchPageState
                   ),
                   items: _clientFiltersOptions,
                   // ignore: lines_longer_than_80_chars
-                  onChanged: controller.changeClientsFiltersOption(),
+                  //onChanged: controller.changeClientsFiltersOption(
+                  //    controller.clientsFiltersOptions.name),
                   //onSaved: (val) => print(val),
                 ),
               ),
@@ -142,7 +148,7 @@ class _ClientSearchPageState
     );
   }
 
-  Widget _buildClientsFiltersTags() {
+  Widget _fieldClientsFiltersTags() {
     return Observer(
       name: 'observerlientsFiltersTags',
       builder: (_) {
@@ -220,7 +226,7 @@ class _ClientSearchPageState
     );
   }
 
-  Widget _buildClientsResult() {
+  Widget _fieldClientsResult() {
     return Observer(
       name: 'clientListObserver',
       builder: (context) {
@@ -274,6 +280,7 @@ class _ClientSearchPageState
           onPressed: controller.isFormValid
               ? () async {
                   print("Client Saved !");
+                  //_saveForm();
                   var list = await controller.searchClientsFilter();
                   //print(controller.searchClients());
                   //if (result) {
@@ -377,11 +384,11 @@ class _ClientSearchPageState
                         SizedBox(
                           height: kDefaultPaddin * 0.5,
                         ),
-                        _buildClientsFiltersOptions(),
+                        _fieldClientsFiltersOptions(),
                         SizedBox(
                           height: kDefaultPaddin * 0.5,
                         ),
-                        _buildClientsFiltersTags(),
+                        _fieldClientsFiltersTags(),
                         SizedBox(
                           height: kDefaultPaddin * 0.5,
                         ),
@@ -389,7 +396,7 @@ class _ClientSearchPageState
                         SizedBox(
                           height: kDefaultPaddin * 0.5,
                         ),
-                        _buildClientsResult()
+                        _fieldClientsResult()
                       ],
                     ),
                   ),

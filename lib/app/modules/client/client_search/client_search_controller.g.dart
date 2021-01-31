@@ -32,13 +32,13 @@ mixin _$ClientSearchController on _ClientSearchControllerBase, Store {
       Atom(name: '_ClientSearchControllerBase.clientsFiltersOptions');
 
   @override
-  ObservableMap<String, dynamic> get clientsFiltersOptions {
+  ObservableMap<String, String> get clientsFiltersOptions {
     _$clientsFiltersOptionsAtom.reportRead();
     return super.clientsFiltersOptions;
   }
 
   @override
-  set clientsFiltersOptions(ObservableMap<String, dynamic> value) {
+  set clientsFiltersOptions(ObservableMap<String, String> value) {
     _$clientsFiltersOptionsAtom.reportWrite(value, super.clientsFiltersOptions,
         () {
       super.clientsFiltersOptions = value;
@@ -112,18 +112,6 @@ mixin _$ClientSearchController on _ClientSearchControllerBase, Store {
 
   final _$_ClientSearchControllerBaseActionController =
       ActionController(name: '_ClientSearchControllerBase');
-
-  @override
-  dynamic changeClientsFiltersOptions(Map<String, dynamic> value) {
-    final _$actionInfo =
-        _$_ClientSearchControllerBaseActionController.startAction(
-            name: '_ClientSearchControllerBase.changeClientsFiltersOptions');
-    try {
-      return super.changeClientsFiltersOptions(value);
-    } finally {
-      _$_ClientSearchControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   dynamic changeClientsFiltersOption(String value) {

@@ -22,21 +22,21 @@ abstract class _ClientSearchControllerBase with Store {
   }
 
   @observable
-  ObservableMap<String, dynamic> clientsFiltersOptions = ObservableMap();
+  ObservableMap<String, String> clientsFiltersOptions = ObservableMap();
 
-  @action
-  // ignore: lines_longer_than_80_chars
-  // ignore: type_annotate_public_apis
-  changeClientsFiltersOptions(Map<String, dynamic> value) =>
-      clientsFiltersOptions = value;
+  //@action
+  //// ignore: type_annotate_public_apis
+  //changeClientsFiltersOption(String clientsFiltersOption) {
+  //  this.clientsFiltersOption['value'] = clientsFiltersOption;
+  //}
 
   @observable
   String clientsFiltersOption;
 
   @action
-  // ignore: lines_longer_than_80_chars
   // ignore: type_annotate_public_apis
-  changeClientsFiltersOption(String value) => clientsFiltersOption = value;
+  changeClientsFiltersOption(String value) =>
+      clientsFiltersOptions = value as ObservableMap<String, String>;
 
   @observable
   String clientsFilterTags;
